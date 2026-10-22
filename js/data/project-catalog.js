@@ -952,30 +952,6 @@ export const projectCatalog = [
     ]
   },
   {
-    "id": "student-campaign",
-    "name": "Выборы президента колледжа",
-    "status": "",
-    "description": "Рекламный постер кандидата в президенты студенческого совета.",
-    "search": "posters ads",
-    "types": [
-      "posters",
-      "ads"
-    ],
-    "color": "#1b1b22",
-    "slides": [
-      {
-        "type": "posters",
-        "types": [
-          "posters",
-          "ads"
-        ],
-        "title": "Выборы президента колледжа — работа 1",
-        "src": "assets/works/posters/posters-05.jpg",
-        "ratio": 1.50059
-      }
-    ]
-  },
-  {
     "id": "boxing-poster",
     "name": "Бокс · афиша соревнований",
     "status": "Афиша мероприятия",

@@ -8,7 +8,7 @@ import { mediaMarkup } from '../js/portfolio/media.js';
 const root = new URL('../', import.meta.url);
 const model = createPortfolioModel(projects);
 assert.equal(new Set(projects.map(p => p.id)).size, projects.length, 'Unique project IDs');
-assert.equal(projects.length, 35, 'Legacy projects and the imported brandbook are retained');
+assert.equal(projects.length, 34, 'The removed student campaign stays out of the catalog');
 for (const project of projects) {
   assert.ok(project.slides.length, `${project.id}: gallery is nonempty`);
   const allowed = project.types.some(type => ['site', 'brand', 'brandbooks'].includes(type));

@@ -136,3 +136,8 @@
     width: var(--tv-width);
   }
 }
+@media (max-width: 480px) {
+  .retro-tv {
+    bottom: calc(100% - var(--room-horizon) - var(--tv-floor-offset) - 16px);
+  }
+}

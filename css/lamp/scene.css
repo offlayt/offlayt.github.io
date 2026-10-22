@@ -6,6 +6,15 @@
   pointer-events: none;
   overflow: hidden;
 }
+.lamp-rig {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(0, 0, 0);
+  transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.lamp-stage.is-retracted .lamp-rig {
+  transform: translate3d(0, calc(-100% - 120px), 0);
+}
 .lamp-stage:before {
   content: '';
   position: absolute;
@@ -143,6 +152,7 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .lamp-rig,
   .lamp-stage:before,
   .lamp-stage .lamp:before,
   .lamp-stage .lamp:after,
