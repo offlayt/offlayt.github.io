@@ -1,0 +1,152 @@
+/* A stack of selectable cards. Only the separate ellipsis reveals details. */
+.web-deck {
+  position: relative;
+  isolation: isolate;
+  touch-action: pan-y;
+  overflow-anchor: none;
+}
+.web-card {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  border: 2px solid #ffffff35;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #2a3531;
+  transform: translateY(var(--card-y));
+  box-shadow: 0 12px 25px #0002;
+  transition: height .5s var(--ease), transform .65s var(--ease), border-color .35s;
+}
+.web-card.is-active {
+  height: var(--web-card-height, 450px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 50px #0004;
+}
+.web-card-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  flex: none;
+  padding: clamp(22px, 2vw, 30px);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: transparent;
+  text-align: left;
+}
+.web-card h4 {
+  max-width: 100%;
+  margin: 0;
+  font-size: clamp(34px, 3vw, 46px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.05em;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.web-card .service-price { margin-top: 12px; font-size: 24px; }
+.web-card-toggle > p { margin: 12px 0 18px; color: #d3cdd4; font-size: 15px; line-height: 1.6; }
+.web-card-preview {
+  display: block;
+  position: relative;
+  width: 100%;
+  margin: 0 0 8px;
+  padding-top: 15px;
+  border: 3px solid #ffffff77;
+  border-radius: 9px;
+  background: #15191d;
+  box-shadow: 0 14px 24px #0005;
+  transform: rotate(-1.5deg);
+  overflow: hidden;
+}
+.web-card-preview::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #c8b6a1;
+  box-shadow: 7px 0 #c8b6a1, 14px 0 #c8b6a1;
+}
+.web-card-image { display: block; width: 100%; height: auto; }
+.web-detail-toggle {
+  position: absolute;
+  z-index: 4;
+  right: 18px;
+  bottom: 30px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0 0 11px 2px;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-shadow: 0 1px 5px #000;
+  transition: background .2s;
+}
+.web-detail-toggle:hover { background: #ffffff18; }
+.web-card-toggle:focus-visible { outline-offset: -7px; border-radius: 22px; }
+.web-detail-toggle:focus-visible { outline-offset: 4px; }
+.web-detail {
+  position: relative;
+  z-index: 2;
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff55 transparent;
+  padding: 0 clamp(22px, 2vw, 30px) 80px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #ded7e2;
+}
+.web-detail .related-links a { font-size: 14px; }
+.web-card.is-expanded .web-card-toggle { height: auto; flex: none; }
+.web-card.is-expanded .web-card-toggle > p { margin-bottom: 16px; }
+.web-card.is-expanded .web-card-preview { display: none; }
+.web-card.is-expanded .web-detail-toggle { bottom: 26px; }
+.web-card:not(.is-active) .web-card-toggle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 8px;
+  padding: 10px 18px;
+}
+.web-card:not(.is-active) h4 {
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.web-card:not(.is-active) .service-price { font-size: 12px; line-height: 22px; margin: 0; }
+.web-card:not(.is-active) .web-card-toggle > p,
+.web-card:not(.is-active) .web-card-preview { display: none; }
+@media (max-width: 760px) {
+  .web-deck { max-width: 480px; margin: auto; }
+  .web-card h4 { font-size: 35px; }
+  .web-card:not(.is-active) h4 { font-size: 16px; }
+  .web-card:not(.is-active) .web-card-toggle { padding-inline: 16px; }
+}
+@media (max-width: 360px) {
+  .web-card h4 { font-size: 31px; }
+  .web-card-toggle { padding: 20px; }
+  .web-card:not(.is-active) h4 { font-size: 15px; }
+  .web-card:not(.is-active) .web-card-toggle { padding-inline: 13px; gap: 5px; }
+  .web-card:not(.is-active) .service-price { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-card { transition: none; }
+}

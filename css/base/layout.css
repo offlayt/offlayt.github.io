@@ -1,0 +1,91 @@
+/* base/layout.css: component styles with their responsive rules. */
+
+main {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+main > section {
+  pointer-events: auto;
+}
+.services,
+.portfolio {
+  padding: 110px var(--gutter) 80px;
+  position: relative;
+}
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  margin-bottom: 64px;
+}
+.section-heading .eyebrow {
+  color: var(--accent);
+  display: block;
+  margin-bottom: 24px;
+}
+.section-heading h2 {
+  font-size: clamp(37px, 5vw, 76px);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.075em;
+}
+.section-heading h2 span {
+  color: var(--muted);
+}
+.section-heading > p {
+  font-size: 14px;
+  color: var(--muted);
+  padding-bottom: 5px;
+  min-width: 210px;
+}
+.column-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  gap: 14px;
+}
+.column-heading h3 {
+  font-size: clamp(30px, 3vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+}
+.column-heading > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.portfolio {
+  padding-top: 100px;
+  min-height: 600px;
+}
+@media (max-width: 760px) {
+  .services,
+  .portfolio {
+    padding: 70px var(--gutter) 40px;
+  }
+  .section-heading {
+    display: block;
+    margin-bottom: 35px;
+  }
+  .section-heading h2 {
+    font-size: 38px;
+  }
+  .section-heading .eyebrow {
+    font-size: 9px;
+    margin-bottom: 18px;
+  }
+  .section-heading > p {
+    margin-top: 22px;
+  }
+  .section-heading > p {
+    font-size: 13px;
+  }
+  .column-heading h3 {
+    font-size: 32px;
+  }
+  .column-heading > span {
+    font-size: 11px;
+  }
+}

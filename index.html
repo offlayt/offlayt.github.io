@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101116" />
+    <meta
+      name="description"
+      content="Зажигаем идеи: сайты, фирменный стиль и дизайн для бизнеса. Услуги, цены и работы студии СВЕТ."
+    />
+    <title>СВЕТ — веб и дизайн для бизнеса</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/contact-panel.css" />
+    <link rel="stylesheet" href="css/landing.css" />
+    <link rel="stylesheet" href="css/portfolio.css" />
+    <script type="module" src="js/contact-panel.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <link rel="canonical" href="https://offlayt.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Студия СВЕТ">
+  <meta property="og:title" content="СВЕТ — веб и дизайн для бизнеса">
+  <meta property="og:description" content="Зажигаем идеи: сайты, фирменный стиль и дизайн для бизнеса. Услуги, цены и работы студии СВЕТ.">
+  <meta property="og:url" content="https://offlayt.github.io/">
+  <meta property="og:image" content="https://offlayt.github.io/assets/og-cover.png">
+  <meta property="og:image:alt" content="Студия СВЕТ — сайты и дизайн для бизнеса">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://offlayt.github.io/assets/og-cover.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=20261021">
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=20261021">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Студия СВЕТ", "url": "https://offlayt.github.io/", "description": "Зажигаем идеи: сайты, фирменный стиль и дизайн для бизнеса. Услуги, цены и работы студии СВЕТ."}</script>
+</head>
+  <body>
+    <a class="skip-link" href="#services">К услугам</a>
+    <header class="header">
+  <a class="logo" href="#top" aria-label="СВЕТ — на главную"
+    ><img src="assets/studio-bulb-logo.png" alt="" width="44" height="44"
+  /></a>
+  <nav class="desktop-nav" aria-label="Основная навигация">
+    <a href="#services">Услуги и цены</a><a href="#portfolio">Портфолио</a>
+  </nav>
+  <button class="contact-trigger" data-contact type="button" aria-haspopup="dialog">
+    Связаться <span aria-hidden="true">↗</span>
+  </button>
+  <button
+    class="burger"
+    type="button"
+    aria-label="Открыть меню"
+    aria-controls="navigation"
+    aria-expanded="false"
+  >
+    <span></span><span></span>
+  </button>
+</header>
+
+    <div
+  class="lamp-stage lamp-scene"
+  data-lamp-anchor="0.79"
+  data-lamp-mobile-anchor="0.82"
+  data-lamp-origin="header"
+  data-lamp-min="140"
+  data-lamp-max="1200"
+>
+  <span class="lamp-anchor" aria-hidden="true"></span>
+  <svg class="lamp-cord" aria-hidden="true">
+    <path class="lamp-cord__base"></path>
+    <path class="lamp-cord__fiber"></path>
+  </svg>
+  <button
+    class="lamp hanging-bulb is-lit"
+    type="button"
+    aria-label="Выключить лампочку; перетащите, чтобы раскачать"
+    aria-pressed="true"
+  >
+    <img class="lamp__image" src="assets/bulb-2026.webp" alt="" draggable="false" />
+  </button>
+</div>
+
+    <main>
+      <section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <h1 id="hero-title"><span class="hero-identity">зажигаем</span><em>идеи.</em></h1>
+    <p>веб-дизайн для бизнеса</p>
+  </div>
+</section>
+
+      <section class="services" id="services" aria-labelledby="services-title">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">ТО, ЧТО МЫ ДЕЛАЕМ</span>
+      <h2 id="services-title">Есть идея?<br /><span>Придадим ей форму.</span></h2>
+    </div>
+  </div>
+  <div class="service-layout">
+    <div class="web-column">
+      <div class="web-sticky">
+        <div class="column-heading">
+          <h3>Сайты</h3>
+          <span>Под вашу задачу</span>
+        </div>
+        <div class="web-deck" id="web-deck" aria-label="Виды сайтов"></div>
+      </div>
+    </div>
+    <div class="design-column">
+      <div class="column-heading">
+        <h3>Дизайн</h3>
+        <span>С характером</span>
+      </div>
+      <div class="design-grid" id="design-grid"></div>
+    </div>
+  </div>
+</section>
+
+      <section class="portfolio" id="portfolio" aria-labelledby="portfolio-title">
+  <div class="section-heading portfolio-heading">
+    <h2 id="portfolio-title">Портфолио<span>.</span></h2>
+    <p>Идеи, которые видно.</p>
+  </div>
+  <div class="portfolio-tools">
+    <label class="search"
+      ><svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="10.5" cy="10.5" r="6.5"></circle>
+        <path d="m16 16 5 5"></path></svg
+      ><input
+        type="search"
+        id="project-search"
+        placeholder="Найти идею, работу или проект"
+        aria-label="Поиск по портфолио" /><span id="project-count" aria-live="polite"></span
+    ></label>
+    <div class="filters" id="filters" role="group" aria-label="Вид работы"></div>
+  </div>
+  <div class="project-grid" id="project-grid"></div>
+  <p class="empty-state" hidden>Пока ничего не нашлось. Попробуйте другой запрос или вид работы.</p>
+  <noscript
+    ><p>
+      Для поиска и просмотра галереи включите JavaScript.
+      <a href="case-rostok.html">Посмотреть кейс школы Росток</a>.
+    </p></noscript
+  >
+</section>
+
+    </main>
+    <footer class="site-footer">
+  <section class="outro" aria-labelledby="outro-title">
+  <div class="outro-copy">
+    <span class="eyebrow">СЛЕДУЮЩИЙ ЭФИР — ВАШ</span>
+    <h2 id="outro-title">Хорошим идеям<br />нужен <em>свет.</em></h2>
+    <p>А вашему бизнесу — сайт и дизайн,<br />которые хочется показывать.</p>
+    <button class="outro-action" type="button" data-contact>
+      Обсудить идею <span aria-hidden="true">↗</span>
+    </button>
+  </div>
+  <div class="retro-tv">
+    <img
+      class="retro-tv-image"
+      src="assets/retro-tv.webp"
+      alt="Винтажный телевизор"
+      width="1200"
+      height="800"
+      loading="lazy"
+    />
+    <button
+      class="tv-screen"
+      type="button"
+      data-contact
+      aria-label="Включить вашу идею — обсудить проект"
+    >
+      <span class="tv-live"><i aria-hidden="true"></i>ПРЯМОЙ ЭФИР</span>
+      <strong>Здесь будет<br /><em>ваша идея.</em></strong>
+      <span class="tv-tune">Включаем? <span aria-hidden="true">↗</span></span>
+    </button>
+    <span class="tv-caption">СВЕТ / ХОРОШИЙ СИГНАЛ ДЛЯ БИЗНЕСА</span>
+  </div>
+</section>
+
+  <div class="footer-bottom">
+    <a class="footer-brand" href="#top" aria-label="СВЕТ — наверх">СВЕТ<span>✳</span></a>
+    <div class="footer-meta">
+      <span>Веб и дизайн для бизнеса</span><span>© СВЕТ, <span id="year">2026</span></span>
+    </div>
+    <a class="footer-up" href="#top">Наверх <span aria-hidden="true">↑</span></a>
+  </div>
+</footer>
+
+    <dialog class="wardrobe-navigation" id="navigation" aria-label="Мобильное меню">
+      <button class="close-button wardrobe-close" type="button" data-close aria-label="Закрыть меню">×</button>
+      <div class="wardrobe-scene">
+          <div class="wardrobe-door">
+            <div class="wardrobe-door-front" aria-hidden="true"></div>
+            <nav class="wardrobe-door-back" aria-label="Мобильная навигация">
+              <a class="wardrobe-plate" href="#services"><strong>Услуги<br>и цены</strong></a>
+              <a class="wardrobe-plate" href="#portfolio"><strong>Портфолио</strong></a>
+              <button class="wardrobe-plate" type="button" data-contact><strong>Связаться</strong></button>
+            </nav>
+          </div>
+      </div>
+    </dialog>
+
+    <dialog class="work-viewer" id="work-viewer" aria-labelledby="viewer-title">
+  <div class="viewer-top">
+    <div>
+      <span id="viewer-project"></span>
+      <h2 id="viewer-title"></h2>
+    </div>
+    <button class="close-button" data-close type="button" aria-label="Закрыть работу">×</button>
+  </div>
+  <div class="viewer-media"></div>
+  <div class="viewer-zoom" role="group" aria-label="Масштаб изображения" hidden>
+    <button type="button" data-zoom="out" aria-label="Уменьшить">−</button>
+    <button type="button" data-zoom="reset" aria-label="Сбросить масштаб">
+      <output>100%</output>
+    </button>
+    <button type="button" data-zoom="in" aria-label="Приблизить">+</button>
+  </div>
+  <div class="viewer-bottom">
+    <button type="button" data-view-step="-1" aria-label="Предыдущий материал">←</button
+    ><span id="viewer-position" aria-live="polite"></span
+    ><button type="button" data-view-step="1" aria-label="Следующий материал">→</button
+    ><a id="viewer-case" href="case-rostok.html">Подробнее <span aria-hidden="true">↗</span></a>
+  </div>
+</dialog>
+
+    <div class="floating-social">
+  <button class="consult" type="button" data-contact aria-haspopup="dialog">
+    Проконсультироваться</button
+  ><button
+    class="social-button telegram"
+    type="button"
+    data-contact
+    data-channel="telegram"
+    aria-label="Связаться в Telegram"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="m3 10 17-7c1-.4 1.4.3 1.2 1.2l-3 15c-.2 1-1 1.1-1.7.5L12 16l-2.4 2.3c-.4.4-.8.2-.8-.3v-3.8L17 6.8l-10 6L3.3 12c-1.1-.3-1.2-1.4-.3-2Z"
+      />
+    </svg></button
+  ><button
+    class="social-button max"
+    type="button"
+    data-contact
+    data-channel="max"
+    aria-label="Связаться в MAX"
+  >
+    <img src="assets/social-max.png" alt="" width="48" height="48" />
+  </button>
+</div>
+<dialog class="drawer contact-drawer" id="contact-dialog" aria-labelledby="contact-title">
+  <button class="contact-handle" data-close type="button">Проконсультироваться</button>
+  <div class="contact-content">
+    <div class="drawer-top">
+      <span>ДАВАЙТЕ ЗНАКОМИТЬСЯ</span
+      ><button class="close-button" type="button" data-close aria-label="Закрыть контакты">
+        ×
+      </button>
+    </div>
+    <div class="contact-hero">
+      <div class="contact-heading">
+        <h2 id="contact-title">Алло,<br /><em>есть идея?</em></h2>
+        <p class="drawer-intro">Расскажите нам.<br />Начнём с живого разговора.</p>
+      </div>
+      <img
+        class="contact-phone"
+        src="assets/retro-phone.webp"
+        alt="Винтажный дисковый телефон"
+        width="1200"
+        height="800"
+      />
+    </div>
+    <div class="contact-groups">
+      <section class="contact-group">
+        <h3>Разработка</h3>
+        <p>Сайты, магазины и сервисы</p>
+        <div class="contact-channels">
+          <a
+            data-contact-channel="telegram"
+            href="https://t.me/offlay7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="channel-icon channel-icon--telegram" aria-hidden="true"
+  ><svg viewBox="0 0 24 24" focusable="false">
+    <path
+      d="m3 10 17-7c1-.4 1.4.3 1.2 1.2l-3 15c-.2 1-1 1.1-1.7.5L12 16l-2.4 2.3c-.4.4-.8.2-.8-.3v-3.8L17 6.8l-10 6L3.3 12c-1.1-.3-1.2-1.4-.3-2Z"
+    /></svg
+></span>
+<span>Telegram</span
+            ><span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a
+            data-contact-channel="max"
+            href="https://max.ru/ooffllaayyttt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="channel-icon channel-icon--max" aria-hidden="true"
+  ><img src="assets/social-max.png" alt="" width="48" height="48"
+/></span>
+<span>MAX</span
+            ><span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+      <section class="contact-group">
+        <h3>Дизайн</h3>
+        <p>Фирменный стиль и графика</p>
+        <div class="contact-channels">
+          <a
+            data-contact-channel="telegram"
+            href="https://t.me/ooommmyyyttt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="channel-icon channel-icon--telegram" aria-hidden="true"
+  ><svg viewBox="0 0 24 24" focusable="false">
+    <path
+      d="m3 10 17-7c1-.4 1.4.3 1.2 1.2l-3 15c-.2 1-1 1.1-1.7.5L12 16l-2.4 2.3c-.4.4-.8.2-.8-.3v-3.8L17 6.8l-10 6L3.3 12c-1.1-.3-1.2-1.4-.3-2Z"
+    /></svg
+></span>
+<span>Telegram</span
+            ><span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+          <button
+            class="pending-contact"
+            type="button"
+            disabled
+            aria-label="ВКонтакте — ссылка скоро появится"
+          >
+            <span class="channel-icon channel-icon--vk" aria-hidden="true"
+  ><svg viewBox="0 0 24 24" focusable="false">
+    <path
+      d="M3 6h3.4c.3 4.7 2.1 6.8 3.5 7.3V6h3.2v4.2c1.4-.2 3-2.2 3.5-4.2h3.2c-.4 2.5-2.1 4.6-3.4 5.5 1.3.7 3.3 2.6 4.1 5.5h-3.6c-.6-1.9-2.1-3.4-3.8-3.6V17h-1.4C6.5 17 3.2 13.5 3 6Z"
+    /></svg
+></span>
+<span>ВКонтакте<small>скоро</small></span>
+          </button>
+        </div>
+      </section>
+    </div>
+    <p class="contact-note">Хорошие проекты начинаются с «привет».</p>
+  </div>
+</dialog>
+
+  </body>
+</html>

@@ -1,0 +1,222 @@
+/* Legacy fullscreen presentation, with the current zoom and case navigation. */
+.work-viewer {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 24px 54px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: #101116fa;
+  color: var(--paper);
+}
+
+.work-viewer::backdrop {
+  background: #08090ce6;
+}
+
+.work-viewer[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: detail-in .3s var(--ease);
+}
+
+.viewer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex: none;
+}
+
+.viewer-top h2 {
+  margin-top: 4px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+}
+
+#viewer-project {
+  color: #b9a6d8;
+  font-size: 11px;
+}
+
+.viewer-top .close-button {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 1px solid #ffffff55;
+  border-radius: 50%;
+  background: #23232b;
+  color: #fff;
+  font-size: 25px;
+}
+
+.viewer-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.viewer-media > img, .viewer-media > video {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.viewer-media > .media-spread {
+  width: min(100%, calc((100dvh - 230px) * var(--spread-ratio)));
+  height: auto;
+  aspect-ratio: var(--spread-ratio);
+}
+
+.viewer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex: none;
+  font-size: 12px;
+}
+
+.viewer-bottom > button {
+  width: 42px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid #ffffff44;
+  border-radius: 8px;
+  background: #24242d;
+  color: #fff;
+  font-size: 20px;
+}
+
+.viewer-bottom > button:hover {
+  border-color: var(--accent);
+}
+
+#viewer-position {
+  min-width: 48px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+#viewer-case {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  min-width: 200px;
+  min-height: 50px;
+  margin-left: 24px;
+  padding: 12px 22px;
+  border-radius: 9px;
+  background: var(--accent);
+  color: #19171d;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+#viewer-case:hover {
+  background: #edca88;
+}
+
+#viewer-case span {
+  font-size: 23px;
+}
+
+.viewer-media.can-zoom {
+  touch-action: none;
+  cursor: zoom-in;
+}
+
+.viewer-media.is-zoomed {
+  cursor: grab;
+}
+
+.viewer-media.is-zoomed:active {
+  cursor: grabbing;
+}
+
+.viewer-media.can-zoom > img, .viewer-media.can-zoom > .media-spread {
+  flex: none;
+  max-width: none;
+  user-select: none;
+  transform-origin: center;
+}
+
+.viewer-zoom {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 4px;
+  border: 1px solid #ffffff35;
+  border-radius: 100px;
+  background: #23232b;
+}
+
+.viewer-zoom button {
+  min-width: 38px;
+  height: 34px;
+  padding: 0;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 21px;
+}
+
+.viewer-zoom [data-zoom='reset'] {
+  min-width: 60px;
+  font-size: 12px;
+  color: var(--paper);
+}
+
+.viewer-zoom button:hover {
+  background: #ffffff18;
+}
+
+.viewer-zoom button:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+@media (max-width: 760px) {
+  .work-viewer {
+    padding: 18px 12px max(18px, env(safe-area-inset-bottom));
+    gap: 12px;
+  }
+  .viewer-top h2 {
+    font-size: 14px;
+  }
+  .viewer-bottom {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  #viewer-case {
+    margin-left: 8px;
+    min-width: 150px;
+    min-height: 48px;
+    padding: 10px 16px;
+    font-size: 14px;
+    gap: 20px;
+  }
+  .viewer-media > .media-spread {
+    width: min(100%, calc((100dvh - 260px) * var(--spread-ratio)));
+  }
+}
+@media (max-width: 360px) {
+  #viewer-case {
+    width: 100%;
+    margin: 0;
+  }
+}

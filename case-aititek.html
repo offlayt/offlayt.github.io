@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101116">
+  <meta name="description" content="Кейс айтитек: структура многостраничного сайта IT-компании и демонстрационный фрагмент страницы услуг.">
+  <title>айтитек — студия СВЕТ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/cases/case-layout.css">
+  <link rel="stylesheet" href="css/cases/case-responsive.css">
+  <link rel="stylesheet" href="css/contact-panel.css">
+  <script type="module" src="js/contact-panel.js"></script>
+  <link rel="canonical" href="https://offlayt.github.io/case-aititek.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Студия СВЕТ">
+  <meta property="og:title" content="айтитек — студия СВЕТ">
+  <meta property="og:description" content="Кейс айтитек: структура многостраничного сайта IT-компании и демонстрационный фрагмент страницы услуг.">
+  <meta property="og:url" content="https://offlayt.github.io/case-aititek.html">
+  <meta property="og:image" content="https://offlayt.github.io/assets/og-cover.png">
+  <meta property="og:image:alt" content="Студия СВЕТ — сайты и дизайн для бизнеса">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="https://offlayt.github.io/assets/og-cover.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=20261021">
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=20261021">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+  <main class="case-screen">
+    <aside class="case-sidebar" aria-label="О проекте">
+      <a class="case-back" href="index.html#portfolio"><span class="case-back__arrow" aria-hidden="true">←</span>Все работы</a>
+      <div class="case-sidebar__main"><span class="case-kicker">МНОГОСТРАНИЧНЫЙ САЙТ</span><h1>айтитек</h1><p>IT-компания: аутсорсинг разработки, CRM, сайты и интернет-реклама.</p></div>
+    </aside>
+    <div class="case-flow" tabindex="0" aria-label="Демонстрация проекта айтитек; прокручивается отдельно">
+      <section class="case-stage case-stage--site" aria-label="Сайт на компьютере и телефоне">
+        <div class="case-stage__head"><h2>Первый экран</h2><span>01 / САЙТ</span></div>
+        <div class="demo-pair">
+          <div class="demo-desktop demo-desktop--capture"><img src="assets/demos/aititek/desktop.webp" alt="Первый экран сайта айтитек на компьютере" loading="eager"><div class="demo-desktop__base" aria-hidden="true"></div></div>
+          <div class="demo-phone demo-phone--capture"><div class="demo-phone__screen"><img src="assets/demos/aititek/mobile.jpg" alt="Мобильная версия сайта айтитек" loading="eager"></div></div>
+        </div>
+      </section>
+      <section class="case-stage case-stage--site" aria-label="Разработка сайтов">
+        <div class="case-stage__head"><h2>Разработка сайтов</h2><span>02 / ЭКРАН</span></div>
+        <div class="case-live"><iframe src="demos/aititek/index.html" title="айтитек: демонстрационный фрагмент разработки сайтов" loading="lazy"></iframe></div>
+        <a class="case-site-link" href="demos/aititek/index.html" target="_blank" rel="noopener noreferrer">Открыть фрагмент ↗</a>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="js/cases/case-layout.js"></script>
+  <div class="floating-social">
+  <button class="consult" type="button" data-contact aria-haspopup="dialog">
+    Проконсультироваться</button
+  ><button
+    class="social-button telegram"
+    type="button"
+    data-contact
+    data-channel="telegram"
+    aria-label="Связаться в Telegram"
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="m3 10 17-7c1-.4 1.4.3 1.2 1.2l-3 15c-.2 1-1 1.1-1.7.5L12 16l-2.4 2.3c-.4.4-.8.2-.8-.3v-3.8L17 6.8l-10 6L3.3 12c-1.1-.3-1.2-1.4-.3-2Z"
+      />
+    </svg></button
+  ><button
+    class="social-button max"
+    type="button"
+    data-contact
+    data-channel="max"
+    aria-label="Связаться в MAX"
+  >
+    <img src="assets/social-max.png" alt="" width="48" height="48" />
+  </button>
+</div>
+<dialog class="drawer contact-drawer" id="contact-dialog" aria-labelledby="contact-title">
+  <button class="contact-handle" data-close type="button">Проконсультироваться</button>
+  <div class="contact-content">
+    <div class="drawer-top">
+      <span>ДАВАЙТЕ ЗНАКОМИТЬСЯ</span
+      ><button class="close-button" type="button" data-close aria-label="Закрыть контакты">
+        ×
+      </button>
+    </div>
+    <div class="contact-hero">
+      <div class="contact-heading">
+        <h2 id="contact-title">Алло,<br /><em>есть идея?</em></h2>
+        <p class="drawer-intro">Расскажите нам.<br />Начнём с живого разговора.</p>
+      </div>
+      <img
+        class="contact-phone"
+        src="assets/retro-phone.webp"
+        alt="Винтажный дисковый телефон"
+        width="1200"
+        height="800"
+      />
+    </div>
+    <div class="contact-groups">
+      <section class="contact-group">
+        <h3>Разработка</h3>
+        <p>Сайты, магазины и сервисы</p>
+        <div class="contact-channels">
+          <a
+            data-contact-channel="telegram"
+            href="https://t.me/offlay7"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="channel-icon channel-icon--telegram" aria-hidden="true"
+  ><svg viewBox="0 0 24 24" focusable="false">
+    <path
+      d="m3 10 17-7c1-.4 1.4.3 1.2 1.2l-3 15c-.2 1-1 1.1-1.7.5L12 16l-2.4 2.3c-.4.4-.8.2-.8-.3v-3.8L17 6.8l-10 6L3.3 12c-1.1-.3-1.2-1.4-.3-2Z"
+    /></svg
+></span>
+<span>Telegram</span
+            ><span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a
+            data-contact-channel="max"
+            href="https://max.ru/ooffllaayyttt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="channel-icon channel-icon--max" aria-hidden="true"
+  ><img src="assets/social-max.png" alt="" width="48" height="48"
+/></span>
+<span>MAX</span
+            ><span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+      <section class="contact-group">
+        <h3>Дизайн</h3>
+        <p>Фирменный стиль и графика</p>
+        <div class="contact-channels">
+          <a
+            data-contact-channel="telegram"
+            href="https://t.me/ooommmyyyttt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="channel-icon channel-icon--telegram" aria-hidden="true"
+  ><svg viewBox="0 0 24 24" focusable="false">
+    <path
+      d="m3 10 17-7c1-.4 1.4.3 1.2 1.2l-3 15c-.2 1-1 1.1-1.7.5L12 16l-2.4 2.3c-.4.4-.8.2-.8-.3v-3.8L17 6.8l-10 6L3.3 12c-1.1-.3-1.2-1.4-.3-2Z"
+    /></svg
+></span>
+<span>Telegram</span
+            ><span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+          <button
+            class="pending-contact"
+            type="button"
+            disabled
+            aria-label="ВКонтакте — ссылка скоро появится"
+          >
+            <span class="channel-icon channel-icon--vk" aria-hidden="true"
+  ><svg viewBox="0 0 24 24" focusable="false">
+    <path
+      d="M3 6h3.4c.3 4.7 2.1 6.8 3.5 7.3V6h3.2v4.2c1.4-.2 3-2.2 3.5-4.2h3.2c-.4 2.5-2.1 4.6-3.4 5.5 1.3.7 3.3 2.6 4.1 5.5h-3.6c-.6-1.9-2.1-3.4-3.8-3.6V17h-1.4C6.5 17 3.2 13.5 3 6Z"
+    /></svg
+></span>
+<span>ВКонтакте<small>скоро</small></span>
+          </button>
+        </div>
+      </section>
+    </div>
+    <p class="contact-note">Хорошие проекты начинаются с «привет».</p>
+  </div>
+</dialog>
+
+</body>
+</html>

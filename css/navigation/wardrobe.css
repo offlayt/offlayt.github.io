@@ -1,0 +1,187 @@
+/* The wardrobe stays behind the screen; only its inner door swings into view. */
+.wardrobe-navigation {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 64px 12px 22px;
+  border: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: transparent;
+  color: var(--paper);
+  overscroll-behavior: contain;
+}
+.wardrobe-navigation::backdrop { background: #08080b55; }
+.wardrobe-navigation[open]::backdrop { animation: wardrobe-dim-in 300ms ease-out both; }
+.wardrobe-navigation.is-closing::backdrop { animation: wardrobe-dim-out 700ms ease-in both; }
+.wardrobe-navigation[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: wardrobe-arrive 300ms ease-out both;
+}
+.wardrobe-navigation.is-closing { animation: wardrobe-leave 700ms ease-in both; }
+.burger[aria-expanded='true'] { visibility: hidden; }
+.wardrobe-close {
+  position: absolute;
+  top: max(18px, env(safe-area-inset-top));
+  right: 20px;
+  z-index: 3;
+  color: var(--paper);
+}
+.wardrobe-scene {
+  position: relative;
+  flex: none;
+  width: min(480px, calc(100vw - 24px));
+  height: min(640px, calc(100dvh - 245px));
+  min-height: 300px;
+  perspective: 1200px;
+  perspective-origin: right center;
+}
+/* A narrow jamb disappears beyond the right edge, like a hinge behind a stage wing. */
+.wardrobe-scene::after {
+  content: '';
+  position: absolute;
+  right: -34px;
+  top: -12px;
+  bottom: -12px;
+  width: 26px;
+  background: linear-gradient(90deg, #1b0f08, #5d381f 50%, #211208);
+  box-shadow: -7px 0 14px #0009;
+}
+.wardrobe-door {
+  position: absolute;
+  inset: 0 -25px 0 25px;
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  transform: rotateY(-5deg);
+}
+.wardrobe-navigation[open] .wardrobe-door {
+  animation: wardrobe-open 1650ms cubic-bezier(.25,.65,.35,1) 80ms both;
+}
+.wardrobe-navigation.is-closing .wardrobe-door {
+  animation: wardrobe-shut 650ms cubic-bezier(.5,0,.7,1) both;
+}
+.wardrobe-door-front,
+.wardrobe-door-back {
+  position: absolute;
+  inset: 0;
+  border: 9px solid #5e381f;
+  border-radius: 3px;
+  background-image: linear-gradient(90deg, #5e381f 7%, transparent 7% 91%, #5e381f 91%), linear-gradient(90deg, #361d0e99, #68432655 48%, #2d170c99), url('../../assets/navigation/soviet-wardrobe.webp');
+  background-size: 100% 100%, 100% 100%, 167.22% 124.38%;
+  background-position: center, center, 50.25% 30.1%;
+  box-shadow: inset 0 0 0 2px #a16c3d55, inset 0 0 26px #130a06aa, -14px 18px 35px #0009;
+  backface-visibility: hidden;
+}
+.wardrobe-door-front { transform: rotateY(180deg); }
+.wardrobe-door-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(12px, 2.5dvh, 24px);
+  padding: 38px clamp(25px, 8vw, 55px);
+}
+/* Wooden cross rails and old brass hinges identify the inside of the door. */
+.wardrobe-door-back::before {
+  content: '';
+  position: absolute;
+  inset: 15px -6px;
+  pointer-events: none;
+  border-top: 14px solid #704725;
+  border-bottom: 14px solid #704725;
+  box-shadow: 0 3px 2px #160c09bb, inset 0 3px 2px #160c09bb;
+}
+.wardrobe-door::before,
+.wardrobe-door::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  right: -11px;
+  width: 23px;
+  height: 51px;
+  border: 1px solid #3b2816;
+  border-radius: 4px;
+  background: repeating-linear-gradient(0deg, transparent 0 15px, #3a271999 16px 17px), linear-gradient(90deg, #755023, #d1af69 45%, #51391c 60%, #ac874b);
+  box-shadow: 2px 2px 4px #0008;
+}
+.wardrobe-door::before { top: 14%; }
+.wardrobe-door::after { bottom: 14%; }
+.wardrobe-plate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  min-height: 76px;
+  width: 100%;
+  padding: 13px 20px;
+  border: 1px solid #e8ca83;
+  border-radius: 4px;
+  background: linear-gradient(120deg, #b48d47, #edcf8d 45%, #b08b40);
+  color: #32200f;
+  text-align: left;
+  box-shadow: 0 5px 0 #2c180c, inset 0 0 0 3px #7b581c33;
+  transition: filter .2s, transform .2s;
+}
+.wardrobe-plate::before,
+.wardrobe-plate::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 7px;
+  height: 7px;
+  border: 1px solid #73531e;
+  border-radius: 50%;
+  background: linear-gradient(0deg, transparent 40%, #67491d 40% 60%, transparent 60%);
+  transform: rotate(-30deg);
+}
+.wardrobe-plate::before { left: 5px; }
+.wardrobe-plate::after { right: 5px; transform: rotate(25deg); }
+.wardrobe-plate strong { font-size: clamp(26px, 7vw, 36px); font-weight: 800; line-height: 1.1; letter-spacing: -.055em; }
+.wardrobe-plate:hover { filter: brightness(1.12); transform: translateY(-2px); }
+.wardrobe-plate:focus-visible { outline: 3px solid #fff3cb; outline-offset: 4px; }
+@keyframes wardrobe-open {
+  0% { transform: rotateY(100deg) rotateZ(2deg); }
+  42% { transform: rotateY(-25deg) rotateZ(-1.4deg); }
+  60% { transform: rotateY(13deg) rotateZ(.9deg); }
+  76% { transform: rotateY(-14deg) rotateZ(-.5deg); }
+  90% { transform: rotateY(3deg) rotateZ(.25deg); }
+  100% { transform: rotateY(-5deg); }
+}
+@keyframes wardrobe-shut {
+  from { transform: var(--wardrobe-close-from, rotateY(-5deg)); }
+  to { transform: rotateY(100deg) rotateZ(2deg); }
+}
+@keyframes wardrobe-arrive { from { opacity: 0; } to { opacity: 1; } }
+@keyframes wardrobe-leave { 0%, 65% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes wardrobe-dim-in { from { background: transparent; } to { background: #08080b55; } }
+@keyframes wardrobe-dim-out { from { background: #08080b55; } to { background: transparent; } }
+@media (max-height: 680px) {
+  .wardrobe-navigation { padding-top: 50px; padding-bottom: 12px; }
+  .wardrobe-scene { height: calc(100dvh - 205px); min-height: 290px; }
+  .wardrobe-door-back { gap: 12px; padding: 30px 28px; }
+  .wardrobe-plate { min-height: 62px; padding: 10px 18px; }
+  .wardrobe-plate strong { font-size: 27px; }
+}
+@media (max-height: 480px) and (min-width: 600px) {
+  .wardrobe-navigation[open] { padding: 35px 45px; }
+  .wardrobe-scene { width: min(480px, calc(100vw - 90px)); height: calc(100dvh - 70px); min-height: 240px; margin-left: auto; }
+  .wardrobe-door-back { gap: 10px; padding: 22px; }
+  .wardrobe-plate { min-height: 50px; padding: 8px 18px; }
+  .wardrobe-plate strong { font-size: 25px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wardrobe-navigation[open],
+  .wardrobe-navigation[open]::backdrop,
+  .wardrobe-navigation.is-closing,
+  .wardrobe-navigation[open] .wardrobe-door { animation: none; }
+}

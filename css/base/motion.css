@@ -1,0 +1,36 @@
+/* base/motion.css: component styles with their responsive rules. */
+body {
+  overflow-x: clip;
+}
+main {
+  overflow-x: clip;
+}
+.reveal-ready {
+  opacity: 0;
+  transform: translate3d(var(--entry-x, 0), 65px, 0) rotate(var(--entry-turn, 0deg));
+  transition:
+    opacity 0.8s ease,
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-ready.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@keyframes detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
