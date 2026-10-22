@@ -1,304 +1,126 @@
+/* Transparent telephone corner and a paper address book share real links. */
 .contact-drawer {
-  width: min(920px, 72vw);
-  background: #25232b;
+  --ink: #382a20;
+  --muted-ink: #79654c;
+  inset: 0;
+  margin: auto;
+  width: min(980px, calc(100% - 48px));
+  height: fit-content;
+  max-height: calc(100dvh - 40px);
+  padding: 36px 22px 24px;
+  border: 0;
   color: #f1eee4;
-  padding: clamp(28px, 3.5vw, 60px);
-  border-left: 1px solid #ffffff20;
-  background-image: radial-gradient(ellipse at 90% 20%, #dfb6691a, transparent 55%);
+  background: transparent;
+  box-shadow: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ae8957 transparent;
 }
-.contact-drawer .drawer-top {
-  color: #b9afc7;
-  margin-bottom: 14px;
+.contact-drawer::backdrop { background: #080a0bc9; backdrop-filter: blur(4px); }
+.contact-drawer[open] { animation: contact-arrive 560ms var(--ease) both; }
+.contact-drawer.is-closing { animation: contact-leave 380ms var(--ease) both; }
+.contact-drawer .contact-close {
+  position: absolute; top: 0; right: 0; z-index: 5;
+  width: 42px; height: 42px; background: #181512; color: #e6cd99;
+  border: 1px solid #c5a36b77; opacity: 1;
 }
-.contact-hero {
-  position: relative;
-  min-height: 320px;
-  isolation: isolate;
-}
-.contact-heading {
-  position: relative;
-  z-index: 1;
-  pointer-events: none;
-}
+.contact-drawer .contact-close:hover { background: #433120; }
+.contact-heading { margin-bottom: 26px; }
+.contact-eyebrow { font-size: 10px; letter-spacing: .18em; color: #c6a36c; }
 .contact-drawer h2 {
-  font:
-    800 clamp(70px, 6.7vw, 106px) / 0.98 Manrope,
-    sans-serif;
-  letter-spacing: -0.055em;
-  padding-top: 20px;
+  margin-top: 10px;
+  font: 700 clamp(32px, 4.7vw, 57px)/1.08 Georgia, 'Times New Roman', serif;
+  letter-spacing: -.035em; color: #f1e6ce;
 }
-.contact-drawer h2 em {
-  color: #dfb669;
-  font-style: normal;
-}
-.contact-drawer .drawer-intro {
-  color: #bcb5c4;
-  font-size: 16px;
-  line-height: 1.6;
-  margin: 24px 0 0;
-}
-.contact-phone {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 58%;
-  height: auto;
-  filter: drop-shadow(0 28px 20px #0006);
-  transform: rotate(-11deg);
-  pointer-events: none;
-}
-.contact-drawer[open] .contact-phone {
-  animation: phone-arrive 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-@keyframes phone-arrive {
-  from {
-    opacity: 0;
-    transform: translate(90px, 45px) rotate(4deg);
-  }
-  to {
-    opacity: 1;
-    transform: rotate(-11deg);
-  }
-}
+.contact-description { margin-top: 12px !important; font-size: 13px; line-height: 1.6; color: #c6bda9; }
+.contact-stage { position: relative; }
+.contact-furniture { display: none; margin: 0; pointer-events: none; }
 .contact-groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 9px solid #493023; border-radius: 6px 10px 10px 6px; background: #9b7646;
+  box-shadow: 0 22px 60px #0009, 0 4px 0 #1b100a, inset 0 0 0 1px #b08854;
 }
 .contact-group {
-  padding: 24px;
-  border: 1px solid #ffffff18;
-  border-radius: 25px;
-  background: #ffffff04;
+  position: relative; min-width: 0; min-height: 340px;
+  padding: clamp(24px, 4vw, 48px) clamp(22px, 3vw, 40px) 46px;
+  color: var(--ink);
+  background: linear-gradient(90deg, #f0e4c8, #e7d6b1 88%, #bba37b);
+  box-shadow: inset 0 -3px 0 #cdb991, inset 0 -5px 0 #ebdcbe;
 }
-.contact-group h3 {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.045em;
+.contact-group + .contact-group { background: linear-gradient(90deg, #ad936c, #e7d6b1 9%, #f0e4c8 88%, #dcc69e); }
+.contact-group::before { content: 'СВЕТ / КОНТАКТЫ'; display: block; margin-bottom: 24px; color: #947a55; font-size: 9px; letter-spacing: .16em; }
+.contact-group::after { content: '01'; position: absolute; right: 28px; bottom: 20px; color: #92794e; font: italic 13px Georgia, serif; }
+.contact-group + .contact-group::after { content: '02'; }
+.contact-group h3 { font: 700 clamp(27px, 3.3vw, 37px)/1.15 Georgia, serif; letter-spacing: -.035em; }
+.contact-group > p { margin: 8px 0 25px; font-size: 11px; line-height: 1.5; color: var(--muted-ink); }
+.contact-channels { display: grid; }
+.contact-channels > a {
+  display: flex; align-items: center; gap: 12px; min-width: 0; min-height: 62px; padding: 10px 0;
+  border-bottom: 1px solid #9b7b4844; color: var(--ink); font-size: 15px; font-weight: 700;
+  transition: color 180ms, padding 180ms, background 180ms;
 }
-.contact-group > p {
-  font-size: 12px;
-  color: #bcb5c4;
-  margin: 8px 0 23px;
+.contact-channels > a:hover, .contact-channels > a.is-channel { color: #8b4c22; background: #9d712713; padding-inline: 7px; }
+.channel-arrow { margin-left: auto; font-size: 23px; font-weight: 400; color: #97743e; }
+.channel-icon { display: grid; place-items: center; flex: none; width: 29px; height: 29px; border: 1px solid #9b7b4866; border-radius: 50%; color: #75542c; font: 700 8px Manrope, sans-serif; }
+.channel-icon svg { width: 15px; height: 15px; fill: currentColor; }
+.contact-drawer :focus-visible { outline: 2px solid #93602a; outline-offset: 4px; }
+.contact-drawer .contact-close:focus-visible { outline-color: #e8ca8b; }
+.contact-note { margin-top: 23px !important; color: #bba98c; font-size: 11px; line-height: 1.5; text-align: center; }
+.is-consult .contact-heading { padding-left: 45%; margin-bottom: 4px; }
+.is-consult .contact-heading h2 { max-width: 300px; }
+.is-consult .contact-stage { display: grid; grid-template-columns: 44% minmax(0, 1fr); align-items: center; gap: 20px; }
+.is-consult .contact-furniture { display: block; position: relative; width: 100%; aspect-ratio: .79; filter: drop-shadow(0 24px 22px #0008); }
+.contact-cabinet { position: absolute; bottom: 0; width: 100%; height: 80%; object-fit: contain; }
+.contact-phone { position: absolute; width: 88%; left: 6%; bottom: 63%; height: auto; filter: drop-shadow(0 8px 5px #0008); }
+.is-consult .contact-groups { grid-template-columns: 1fr; gap: 15px; border: 0; background: transparent; box-shadow: none; padding: 16px 10px 16px 0; }
+.is-consult .contact-group { min-height: 0; padding: 22px 26px 18px; border: 1px solid #bcaa85; border-radius: 2px; background: linear-gradient(125deg, #eee1c3, #dfcba3); box-shadow: 2px 4px 0 #b49c74, 0 10px 25px #0005; transform: rotate(1.5deg); }
+.is-consult .contact-group + .contact-group { transform: rotate(-1.3deg); }
+.is-consult .contact-group::before { content: 'НАПИШИТЕ НАМ'; margin-bottom: 12px; font-size: 8px; }
+.is-consult .contact-group::after { display: none; }
+.is-consult .contact-group h3 { font-size: 29px; }
+.is-consult .contact-group > p { margin: 6px 0 9px; }
+.is-consult .contact-channels > a { min-height: 46px; padding-block: 7px; font-size: 14px; }
+.is-consult .contact-note { margin-top: 10px !important; }
+@keyframes contact-arrive { from { opacity: 0; transform: translateY(55px); } to { opacity: 1; transform: none; } }
+@keyframes contact-leave { to { opacity: 0; transform: translateY(45px); } }
+.is-book[open] .contact-groups { animation: book-unfold 650ms var(--ease) both; transform-origin: center bottom; }
+@keyframes book-unfold { from { opacity: 0; transform: perspective(1000px) rotateX(12deg) scale(.95); } to { opacity: 1; transform: none; } }
+@media (max-width: 600px) {
+  .contact-drawer { width: calc(100% - 20px); max-height: calc(100dvh - 20px); padding: 44px 8px 18px; }
+  .contact-heading { margin-bottom: 20px; padding-inline: 8px; }
+  .contact-drawer h2 { font-size: clamp(30px, 7.3vw, 42px); }
+  .contact-description { font-size: 12px; }
+  .contact-groups { grid-template-columns: 1fr; border-width: 6px; }
+  .contact-group, .contact-group + .contact-group { min-height: 0; padding: 24px 24px 32px; background: linear-gradient(90deg, #d1bd96, #f0e4c8 7%, #ebdcbb 94%, #d4bd95); }
+  .contact-group + .contact-group { border-top: 1px solid #ab8a5755; }
+  .contact-group::before { margin-bottom: 15px; }
+  .contact-group h3 { font-size: 29px; }
+  .contact-group > p { margin-bottom: 12px; }
+  .contact-channels > a { min-height: 52px; }
+  .is-consult { margin-bottom: max(12px, env(safe-area-inset-bottom)); }
+  .is-consult .contact-heading { padding: 0 8px; margin-bottom: 8px; }
+  .is-consult .contact-heading h2 { max-width: none; }
+  .is-consult .contact-stage { grid-template-columns: 37% minmax(0, 1fr); gap: 8px; align-items: end; }
+  .is-consult .contact-furniture { width: 145%; margin-left: -23%; margin-bottom: 5px; }
+  .is-consult .contact-groups { gap: 12px; padding-right: 5px; }
+  .is-consult .contact-group { padding: 17px 14px 12px; }
+  .is-consult .contact-group h3 { font-size: clamp(21px, 5.5vw, 28px); }
+  .is-consult .contact-group > p { font-size: 10px; margin-bottom: 8px; }
+  .is-consult .contact-group::before { font-size: 7px; margin-bottom: 9px; }
+  .is-consult .contact-channels > a { gap: 8px; font-size: 12px; }
+  .is-consult .channel-icon { width: 24px; height: 24px; }
+  .is-consult .contact-note { padding-inline: 8px; font-size: 10px; }
 }
-.contact-channels {
-  display: grid;
-  gap: 10px;
-}
-.contact-channels > a,
-.contact-channels > button {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-width: 0;
-  min-height: 80px;
-  padding: 12px;
-  border: 1px solid #ffffff20;
-  border-radius: 18px;
-  background: #302c39;
-  color: #f1eee4;
-  font-size: 17px;
-  font-weight: 700;
-  text-align: left;
-  transition:
-    background 0.25s,
-    transform 0.35s cubic-bezier(0.22, 0.8, 0.24, 1),
-    border-color 0.25s;
-}
-.contact-channels > a:hover,
-.contact-channels > a.is-channel {
-  background: #44394f;
-  border-color: #ad99d6;
-  transform: translateY(-3px);
-}
-.channel-arrow {
-  margin-left: auto;
-  color: #dfb669;
-  font-size: 23px;
-}
-.channel-icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  flex: none;
-  border-radius: 15px;
-  overflow: hidden;
-}
-.channel-icon svg {
-  width: 27px;
-  height: 27px;
-  fill: white;
-}
-.channel-icon img {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.channel-icon--telegram {
-  background: #21a2cc;
-}
-.channel-icon--max {
-  background: #7855d9;
-}
-.channel-icon--vk {
-  background: #4479b3;
-}
-.contact-channels .pending-contact {
-  opacity: 0.48;
-  cursor: default;
-}
-.pending-contact small {
-  display: block;
-  font-size: 10px;
-  color: #bcb5c4;
-  margin-top: 3px;
-}
-.contact-note {
-  margin: 28px 0 0 !important;
-  color: #a9a1b4;
-  font-size: 12px;
-}
-.contact-handle {
-  display: none;
-}
-@media (max-width: 1100px) and (min-width: 761px) {
-  .contact-drawer {
-    width: 84vw;
-  }
-  .contact-drawer h2 {
-    font-size: 80px;
-  }
-  .contact-channels > a,
-  .contact-channels > button {
-    gap: 10px;
-    font-size: 15px;
-  }
-}
-@media (max-width: 760px) {
-  .contact-drawer {
-    width: 100%;
-    padding: 22px;
-  }
-  .contact-drawer h2 {
-    font-size: 56px;
-    padding-top: 6px;
-  }
-  .contact-drawer .drawer-top {
-    font-size: 8px;
-  }
-  .contact-hero {
-    min-height: 245px;
-  }
-  .contact-phone {
-    width: 62%;
-    right: 0;
-    bottom: 0;
-  }
-  .contact-drawer .drawer-intro {
-    font-size: 12px;
-    margin-top: 22px;
-    max-width: 44%;
-  }
-  .contact-groups {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  .contact-group {
-    padding: 18px;
-    border-radius: 21px;
-  }
-  .contact-group h3 {
-    font-size: 26px;
-  }
-  .contact-group > p {
-    margin: 6px 0 15px;
-    font-size: 11px;
-  }
-  .contact-channels {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-  .contact-channels > a,
-  .contact-channels > button {
-    flex-direction: column;
-    align-items: start;
-    gap: 10px;
-    padding: 13px;
-    min-height: 112px;
-    position: relative;
-    font-size: 15px;
-  }
-  .channel-arrow {
-    position: absolute;
-    right: 12px;
-    top: 16px;
-  }
-  .channel-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-  }
-  .contact-note {
-    font-size: 10px;
-    margin-top: 18px !important;
-  }
-  .contact-drawer.from-floating {
-    inset: auto 10px calc(12px + env(safe-area-inset-bottom));
-    width: auto;
-    height: auto;
-    max-height: calc(100dvh - 88px);
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-    overflow: visible;
-  }
-  .contact-drawer.from-floating[open],
-  .contact-drawer.from-floating.is-closing {
-    animation: none;
-  }
-  .from-floating .contact-handle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: calc(100% - 112px);
-    margin: 0 0 10px 4px;
-    border-radius: 100px;
-    background: #dfb669;
-    color: #19171d;
-    font-size: clamp(12px, 3.35vw, 15px);
-    font-weight: 800;
-    box-shadow: 0 6px 24px #0004;
-  }
-  .from-floating.without-consult .contact-handle {
-    display: none;
-  }
-  .from-floating .contact-content {
-    padding: 22px;
-    border: 1px solid #ffffff24;
-    border-radius: 28px;
-    background: radial-gradient(ellipse at top right, #403238, #25232b 55%);
-    max-height: calc(100dvh - 164px);
-    overflow: auto;
-    overscroll-behavior: contain;
-    box-shadow: 0 20px 60px #0006;
-  }
-  .from-floating.without-consult .contact-content {
-    max-height: calc(100dvh - 100px);
-  }
-  .from-floating .drawer-top {
-    margin-bottom: 8px;
-  }
-  .from-floating .drawer-top .close-button {
-    width: 36px;
-    height: 36px;
-    font-size: 25px;
-  }
+@media (max-height: 560px) and (min-width: 601px) {
+  .contact-drawer { max-height: calc(100dvh - 16px); padding-top: 25px; }
+  .contact-heading { margin-bottom: 12px; }
+  .contact-drawer h2 { font-size: 34px; }
+  .contact-group { min-height: 250px; padding-block: 22px 35px; }
+  .contact-group::before { margin-bottom: 10px; }
+  .is-consult .contact-furniture { max-height: 330px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .contact-drawer[open] .contact-phone {
-    animation: none;
-  }
+  .contact-drawer[open], .contact-drawer.is-closing, .is-book[open] .contact-groups { animation: none; }
+  .contact-channels > a { transition: none; }
 }
