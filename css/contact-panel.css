@@ -1,5 +1,5 @@
 @charset "UTF-8";
 /* Component entry point; import order preserves the original cascade. */
 @import url('./shared/dialog.css');
-@import url('./contacts/panel.css');
+@import url('./contacts/panel.css?v=20261022-objects');
 @import url('./contacts/floating.css');
