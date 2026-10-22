@@ -7,7 +7,7 @@
   height: 100dvh;
   max-height: none;
   margin: 0;
-  padding: 64px 12px 22px;
+  padding: 64px 0 22px;
   border: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -21,7 +21,7 @@
 .wardrobe-navigation[open] {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   animation: wardrobe-arrive 300ms ease-out both;
 }
@@ -42,12 +42,13 @@
   min-height: 300px;
   perspective: 1200px;
   perspective-origin: right center;
+  margin-right: 0;
 }
 /* A narrow jamb disappears beyond the right edge, like a hinge behind a stage wing. */
 .wardrobe-scene::after {
   content: '';
   position: absolute;
-  right: -34px;
+  right: -26px;
   top: -12px;
   bottom: -12px;
   width: 26px;
@@ -56,7 +57,7 @@
 }
 .wardrobe-door {
   position: absolute;
-  inset: 0 -25px 0 25px;
+  inset: 0;
   transform-origin: right center;
   transform-style: preserve-3d;
   transform: rotateY(-5deg);
@@ -173,8 +174,8 @@
   .wardrobe-plate strong { font-size: 27px; }
 }
 @media (max-height: 480px) and (min-width: 600px) {
-  .wardrobe-navigation[open] { padding: 35px 45px; }
-  .wardrobe-scene { width: min(480px, calc(100vw - 90px)); height: calc(100dvh - 70px); min-height: 240px; margin-left: auto; }
+  .wardrobe-navigation[open] { padding: 35px 0; }
+  .wardrobe-scene { width: min(480px, calc(100vw - 24px)); height: calc(100dvh - 70px); min-height: 240px; margin-left: auto; }
   .wardrobe-door-back { gap: 10px; padding: 22px; }
   .wardrobe-plate { min-height: 50px; padding: 8px 18px; }
   .wardrobe-plate strong { font-size: 25px; }
