@@ -1,0 +1,57 @@
+/* A stationary wall behind the content; only its translucent shade moves. */
+.wallpaper {
+  --wall-light-power: 0;
+  --wall-light-radius: clamp(320px, 44vw, 720px);
+  --wallpaper-tile: url('../../assets/backgrounds/damask-charcoal.webp');
+  --wallpaper-size: 480px 480px;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #171616 var(--wallpaper-tile) repeat 0 0 / var(--wallpaper-size);
+}
+
+.wallpaper:before,
+.wallpaper:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+/* Keep the dark mask constant so switching power never flashes the whole wall.
+   Reveal an aligned copy of the texture through a soft pool of warm light. */
+.wallpaper:before {
+  background: #080a0fd1;
+}
+
+.wallpaper:after {
+  background-image: linear-gradient(#e8ba701c, #e8ba701c), var(--wallpaper-tile);
+  background-size: auto, var(--wallpaper-size);
+  background-position: 0 0;
+  background-repeat: no-repeat, repeat;
+  mask-image: radial-gradient(
+    ellipse var(--wall-light-radius) calc(var(--wall-light-radius) * 0.88)
+      at var(--wall-light-x, 79vw) var(--wall-light-y, 65vh),
+    #000 0%,
+    #0009 28%,
+    #0001 68%,
+    transparent 100%
+  );
+  opacity: var(--wall-light-power);
+}
+
+@media (max-width: 850px) {
+  .wallpaper {
+    --wall-light-radius: 340px;
+    --wallpaper-size: 360px 360px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wallpaper:before,
+  .wallpaper:after {
+    transition: none;
+  }
+}

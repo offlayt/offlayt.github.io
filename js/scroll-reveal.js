@@ -19,7 +19,7 @@ export function initScrollReveal() {
 
   function register() {
     queryAll(
-      '.section-heading, .web-deck, .design-card, .project-media, .project-caption, .outro-copy, .retro-tv, .footer-bottom',
+      '.section-heading, .web-deck, .design-card, .project-media, .project-caption, .footer-bottom',
     ).forEach((element, index) => {
       if (observed.has(element)) return;
       observed.add(element);

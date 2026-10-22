@@ -1,0 +1,69 @@
+/* Rounded CRT glass, a continuous picture, and one brief signal fault per 23 s. */
+.tv-screen {
+  position: absolute;
+  left: 10%;
+  top: 17%;
+  width: 60%;
+  height: 56%;
+  border-radius: 12% / 17%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0b1510;
+  box-shadow: 0 0 18px #c4d2a51c;
+  pointer-events: none;
+}
+.tv-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+  filter: brightness(0.86) contrast(1.1) saturate(0.75) sepia(0.12);
+  transform: scale(1.03);
+  animation: tv-picture-drift 23s linear infinite;
+  pointer-events: none;
+}
+.tv-screen:before,
+.tv-screen:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.tv-screen:before {
+  z-index: 1;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(transparent 0 2px, #06100836 2px 3px),
+    radial-gradient(ellipse, transparent 40%, #07100940 74%, #020704b3 100%),
+    linear-gradient(125deg, #f5efd017, transparent 32%, transparent 72%, #06100b36);
+  box-shadow: inset 0 0 16px #0007;
+}
+.tv-screen:after {
+  z-index: 2;
+  inset: -8% 0;
+  opacity: 0;
+  background:
+    repeating-linear-gradient(0deg, #dce0c866 0 1px, transparent 1px 4px, #050a0899 4px 6px),
+    linear-gradient(transparent 24%, #d0dbc94d 40%, #0b151a66 55%, transparent 70%);
+  animation: tv-signal-fault 23s steps(1, end) infinite;
+}
+@keyframes tv-signal-fault {
+  0%, 97.5%, 99.4%, 100% { opacity: 0; transform: translateY(0); }
+  97.7% { opacity: 0.24; transform: translateY(-8%); }
+  98.1% { opacity: 0.08; transform: translateY(5%); }
+  98.5% { opacity: 0.18; transform: translateY(0); }
+  98.9% { opacity: 0; }
+}
+@keyframes tv-picture-drift {
+  0%, 97.5%, 99.4%, 100% { transform: scale(1.03); }
+  97.8% { transform: translate(-1.5px, 0.5px) scale(1.03); }
+  98.2% { transform: translate(1px, -0.5px) scale(1.03); }
+  98.7% { transform: scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tv-video,
+  .tv-screen:after {
+    animation: none;
+  }
+}

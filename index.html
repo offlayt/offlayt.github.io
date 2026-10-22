@@ -16,10 +16,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/contact-panel.css" />
-    <link rel="stylesheet" href="css/landing.css" />
+    <link rel="stylesheet" href="css/landing.css?v=20261022-dev1" />
     <link rel="stylesheet" href="css/portfolio.css" />
     <script type="module" src="js/contact-panel.js"></script>
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/main.js?v=20261022-dev1"></script>
     <link rel="canonical" href="https://offlayt.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Студия СВЕТ">
@@ -36,6 +36,7 @@
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Студия СВЕТ", "url": "https://offlayt.github.io/", "description": "Зажигаем идеи: сайты, фирменный стиль и дизайн для бизнеса. Услуги, цены и работы студии СВЕТ."}</script>
 </head>
   <body>
+    <div class="wallpaper" aria-hidden="true"></div>
     <a class="skip-link" href="#services">К услугам</a>
     <header class="header">
   <a class="logo" href="#top" aria-label="СВЕТ — на главную"
@@ -146,36 +147,48 @@
 
     </main>
     <footer class="site-footer">
-  <section class="outro" aria-labelledby="outro-title">
-  <div class="outro-copy">
-    <span class="eyebrow">СЛЕДУЮЩИЙ ЭФИР — ВАШ</span>
-    <h2 id="outro-title">Хорошим идеям<br />нужен <em>свет.</em></h2>
-    <p>А вашему бизнесу — сайт и дизайн,<br />которые хочется показывать.</p>
-    <button class="outro-action" type="button" data-contact>
-      Обсудить идею <span aria-hidden="true">↗</span>
+  <div class="room-floor" aria-hidden="true">
+    <div class="room-floor__boards"></div>
+  </div>
+  <div class="room-baseboard" aria-hidden="true"></div>
+  <section class="outro" aria-label="Обсудить проект">
+  <div class="room-rug" aria-hidden="true">
+    <img src="assets/backgrounds/persian-rug.webp" alt="" width="736" height="414" loading="lazy" />
+  </div>
+  <div class="radio-corner">
+    <img class="radio-stool" src="assets/room/wooden-stool.webp" alt="" width="640" height="665" loading="lazy" />
+    <button class="radio-button" type="button" aria-label="Включить радио" aria-pressed="false" data-radio-src="">
+      <img src="assets/room/vintage-radio.webp" alt="" width="640" height="505" loading="lazy" />
+      <span class="radio-dial-light" aria-hidden="true"></span>
     </button>
+    <audio class="radio-audio" preload="none" loop aria-hidden="true"></audio>
   </div>
   <div class="retro-tv">
+    <img class="tv-boat" src="assets/room/paper-boat.webp" alt="Бумажный кораблик на телевизоре" width="480" height="161" loading="lazy" />
     <img
       class="retro-tv-image"
       src="assets/retro-tv.webp"
-      alt="Винтажный телевизор"
+      alt="Винтажный телевизор, показывающий мультфильм «Ну, погоди!»"
       width="1200"
       height="800"
       loading="lazy"
     />
-    <button
-      class="tv-screen"
-      type="button"
-      data-contact
-      aria-label="Включить вашу идею — обсудить проект"
-    >
-      <span class="tv-live"><i aria-hidden="true"></i>ПРЯМОЙ ЭФИР</span>
-      <strong>Здесь будет<br /><em>ваша идея.</em></strong>
-      <span class="tv-tune">Включаем? <span aria-hidden="true">↗</span></span>
-    </button>
-    <span class="tv-caption">СВЕТ / ХОРОШИЙ СИГНАЛ ДЛЯ БИЗНЕСА</span>
+    <div class="tv-screen" aria-hidden="true">
+      <video
+        class="tv-video"
+        data-src="assets/tv/nu-pogodi-boxing-loop.mp4"
+        poster="assets/tv/nu-pogodi-boxing-poster.jpg"
+        autoplay muted loop playsinline
+        preload="none"
+        disablepictureinpicture disableremoteplayback
+        controlslist="nodownload nofullscreen noremoteplayback"
+        tabindex="-1"
+      ></video>
+    </div>
   </div>
+  <button class="outro-action" type="button" data-contact>
+    Обсудить идею <span aria-hidden="true">↗</span>
+  </button>
 </section>
 
   <div class="footer-bottom">
@@ -294,7 +307,7 @@
           </a>
           <a
             data-contact-channel="max"
-            href="https://max.ru/ooffllaayyttt"
+            href="https://max.ru/u/f9LHodD0cOLpKuyKnoBdaipHRgNgIOgZjc3wMZrDLXmiw1xeiKepsXGpun4"
             target="_blank"
             rel="noopener noreferrer"
           >
