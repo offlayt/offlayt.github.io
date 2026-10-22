@@ -1,25 +1,72 @@
 import { query, queryAll } from './core/dom.js';
 import { createDialog } from './core/dialog.js';
 import { initFloatingContacts } from './contacts/floating.js';
+import { reducedMotion } from './core/media.js';
 
 const dialog = query('#contact-dialog');
 if (dialog) {
   const triggers = queryAll('[data-contact]');
   const floating = query('.floating-social');
   const channels = queryAll('[data-contact-channel]', dialog);
+  const leaf = query('.contact-leaf', dialog);
+  const consult = query('.consult');
   let lastTrigger;
-  initFloatingContacts(floating, query('.consult'), query('.hero'));
+  let openingRevision = 0;
+  initFloatingContacts(floating, consult, query('.hero'));
+
+  function placeTelephone() {
+    if (!dialog.classList.contains('is-consult') || !lastTrigger) return;
+    const foundation = consult && !consult.hidden ? consult : lastTrigger;
+    const rect = foundation.getBoundingClientRect();
+    const viewport = document.documentElement.clientWidth;
+    const halfProp = query('.contact-furniture', dialog).getBoundingClientRect().width / 2 + 8;
+    const desiredCenter = foundation === consult ? rect.left + rect.width / 2 : viewport / 2;
+    const center = Math.max(halfProp, Math.min(viewport - halfProp, desiredCenter));
+    dialog.style.setProperty('--consult-x', `${center}px`);
+    dialog.style.setProperty('--consult-bottom', `${Math.max(14, window.innerHeight - rect.top)}px`);
+  }
   const modal = createDialog(dialog, {
-    closeDuration: 380,
-    onOpen() { floating?.classList.add('is-open'); },
+    closeDuration: 650,
+    onOpen() {
+      const revision = ++openingRevision;
+      const consultation = dialog.classList.contains('is-consult');
+      // Keep the consultation button underneath the falling furniture.
+      floating?.classList.toggle('is-open', !consultation);
+      dialog.classList.remove('is-ready');
+      placeTelephone();
+      leaf.inert = !reducedMotion.matches;
+      if (consultation) {
+        const images = queryAll('.contact-furniture img', dialog);
+        images.forEach(image => { image.loading = 'eager'; });
+        Promise.all(images.map(image => image.decode().catch(() => {}))).then(() => {
+          if (revision === openingRevision && dialog.open && !dialog.classList.contains('is-closing')) dialog.classList.add('is-ready');
+        });
+      }
+    },
+    onClosing() {
+      openingRevision++;
+      leaf.style.setProperty('--book-close-from', getComputedStyle(leaf).transform);
+      leaf.inert = true;
+    },
     onClose() {
+      openingRevision++;
       floating?.classList.remove('is-open');
       triggers.forEach(trigger => trigger.setAttribute('aria-expanded', 'false'));
       if (lastTrigger?.closest('dialog:not([open])')) query('.burger')?.focus();
     },
   });
-  // Transparent space between the props also dismisses the dialog.
+  leaf.addEventListener('animationend', event => {
+    if (event.animationName === 'contact-page-open' || event.animationName === 'contact-note-right') leaf.inert = false;
+  });
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) leaf.inert = false;
+  });
+  window.addEventListener('resize', placeTelephone);
   dialog.addEventListener('click', event => {
+    if (dialog.classList.contains('is-consult')) {
+      if (!event.target.closest('a[data-contact-channel]')) modal.close();
+      return;
+    }
     if (event.target === dialog || event.target.matches('.contact-stage')) modal.close();
   });
   triggers.forEach(trigger => {

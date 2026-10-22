@@ -10,7 +10,7 @@
 @import url('./services/web-deck.css');
 @import url('./services/design.css');
 @import url('./shared/surface-light.css');
-@import url('./navigation/wardrobe.css');
+@import url('./navigation/wardrobe.css?v=20261022-edge');
 @import url('./sections/outro.css?v=20261022-retract');
 @import url('./sections/footer.css?v=20261022-retract');
 @import url('./sections/footer-tv.css?v=20261022-tv2');
