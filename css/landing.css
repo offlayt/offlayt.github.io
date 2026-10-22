@@ -11,9 +11,9 @@
 @import url('./services/design.css');
 @import url('./shared/surface-light.css');
 @import url('./navigation/wardrobe.css');
-@import url('./sections/outro.css?v=20261022-radio');
-@import url('./sections/footer.css?v=20261022-radio');
+@import url('./sections/outro.css?v=20261022-retract');
+@import url('./sections/footer.css?v=20261022-retract');
 @import url('./sections/footer-tv.css?v=20261022-tv2');
 @import url('./sections/footer-props.css');
-@import url('./lamp/scene.css');
+@import url('./lamp/scene.css?v=20261022-retract');
 @import url('./base/motion.css');
