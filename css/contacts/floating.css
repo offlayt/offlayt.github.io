@@ -1,0 +1,123 @@
+.floating-social {
+  --accent: #dfb669;
+  --paper: #f1eee4;
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  z-index: 35;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  box-sizing: border-box;
+  font-family: Manrope, Arial, sans-serif;
+}
+.floating-social * {
+  box-sizing: border-box;
+}
+.floating-social button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+.floating-social button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.floating-social .social-button {
+  border: 2px solid #f5f1e9;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  box-shadow: 0 5px 18px #0003;
+  transition: transform 0.25s;
+}
+.social-button:hover {
+  transform: translateY(-4px);
+}
+.social-button.telegram {
+  display: grid;
+  place-items: center;
+  background: #21a2cc;
+}
+.telegram svg {
+  width: 26px;
+  height: 26px;
+  fill: white;
+}
+.social-button.max {
+  margin-left: -10px;
+  background: #7855d9;
+  overflow: hidden;
+}
+.max img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.consult {
+  display: none;
+}
+@media (max-width: 760px) {
+  .floating-social {
+    left: 14px;
+    right: 14px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  .floating-social .consult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: calc(100% - 108px);
+    min-width: 0;
+    height: 50px;
+    padding: 0 10px;
+    border: 0;
+    background: var(--accent);
+    color: #19171d;
+    border-radius: 100px;
+    text-align: center;
+    font-size: clamp(12px, 3.35vw, 15px);
+    font-weight: 800;
+    box-shadow: 0 6px 24px #0004;
+    white-space: nowrap;
+    overflow: hidden;
+    transform-origin: right center;
+    transition:
+      max-width 0.6s cubic-bezier(0.22, 0.8, 0.24, 1),
+      padding 0.6s cubic-bezier(0.22, 0.8, 0.24, 1),
+      margin 0.6s cubic-bezier(0.22, 0.8, 0.24, 1),
+      opacity 0.3s,
+      transform 0.6s cubic-bezier(0.22, 0.8, 0.24, 1);
+  }
+  .floating-social .social-button {
+    width: 46px;
+    height: 46px;
+    flex: none;
+    border: 0;
+    margin: 0;
+  }
+  .floating-social.is-open .consult {
+    opacity: 0;
+  }
+  .floating-social.is-compact .consult {
+    max-width: 0;
+    padding-inline: 0;
+    margin-right: -8px;
+    opacity: 0;
+    transform: translateY(18px) scale(0.85);
+    pointer-events: none;
+  }
+  .floating-social .consult[hidden] {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-social .consult {
+    transition: none;
+  }
+}

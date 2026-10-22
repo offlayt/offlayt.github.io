@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/* Source: cases/case-responsive.css */
+
+/* Compact case introductions on phones and tablet portrait widths. */
+@media (max-width: 1000px) {
+  .case-screen {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  .case-sidebar {
+    gap: 9px;
+    min-height: 0;
+    padding: 12px clamp(18px, 4vw, 32px) 15px;
+    border-right: 0;
+    border-bottom: 1px solid #ffffff20;
+  }
+  .case-back {
+    min-height: 36px;
+    gap: 10px;
+    padding: 0;
+    font-size: 13px;
+  }
+  .case-back__arrow {
+    width: 36px;
+    height: 36px;
+  }
+  .case-sidebar__main {
+    margin: 0;
+    padding: 0;
+  }
+  .case-kicker {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .case-sidebar h1,
+  .case-sidebar h1.case-sidebar__title--long {
+    margin: 6px 0;
+    font-size: clamp(29px, 5vw, 42px);
+    line-height: 1.02;
+  }
+  .case-sidebar p {
+    max-width: 65ch;
+    font-size: clamp(12px, 1.8vw, 14px);
+    line-height: 1.35;
+  }
+  .case-sidebar__bottom {
+    display: none;
+  }
+  .case-flow {
+    scroll-snap-type: none;
+  }
+  .case-stage {
+    min-height: 0;
+    justify-content: flex-start;
+    padding: 22px clamp(18px, 4vw, 32px) 30px;
+  }
+  .case-stage__head {
+    margin-bottom: 18px;
+  }
+  .case-site-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 12px;
+  }
+  .case-media {
+    max-height: 55vh;
+  }
+}
+
+@media (max-width: 400px) {
+  .case-sidebar {
+    padding-inline: 16px;
+  }
+  .case-sidebar h1,
+  .case-sidebar h1.case-sidebar__title--long {
+    font-size: 29px;
+  }
+  .case-stage {
+    padding-inline: 16px;
+  }
+  .case-stage__head h2 {
+    font-size: 22px;
+  }
+  .case-stage__head span {
+    font-size: 9px;
+  }
+  .case-media-grid,
+  .case-media-grid--three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .case-media-grid--three img:last-child {
+    grid-column: 1 / -1;
+    max-height: 32vh;
+  }
+}
+
+@media (min-width: 2000px) {
+  .case-screen {
+    grid-template-columns: minmax(520px, 30%) minmax(0, 1fr);
+  }
+  .case-sidebar {
+    padding: clamp(52px, 3vw, 100px);
+  }
+  .case-sidebar h1 {
+    font-size: clamp(82px, 3.8vw, 128px);
+  }
+  .case-sidebar h1.case-sidebar__title--long {
+    font-size: clamp(62px, 3vw, 100px);
+  }
+  .case-sidebar p {
+    max-width: 38ch;
+    font-size: clamp(20px, 1vw, 28px);
+  }
+  .case-back {
+    font-size: clamp(16px, 0.9vw, 23px);
+  }
+  .case-stage {
+    padding: clamp(52px, 3vw, 110px);
+  }
+  .case-stage__head h2 {
+    font-size: clamp(42px, 2vw, 64px);
+  }
+  .demo-pair,
+  .case-live,
+  .case-media-grid {
+    max-width: 1900px;
+    margin-inline: auto;
+  }
+}

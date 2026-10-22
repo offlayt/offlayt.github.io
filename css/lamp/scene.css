@@ -1,0 +1,152 @@
+/* The preserved site's lamp artwork and light, in a fixed viewport layer. */
+.lamp-stage {
+  position: fixed;
+  inset: var(--header) 0 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.lamp-stage:before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: var(--light-x, 79%);
+  top: var(--light-y, 60%);
+  width: min(760px, 45vw);
+  height: min(760px, 45vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #f8d78c55 0%, #edb9632e 24%, #dfb66914 45%, transparent 72%);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.lamp-stage.is-off:before {
+  opacity: 0;
+}
+.lamp-anchor {
+  position: absolute;
+  z-index: 14;
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 14px;
+  border: 2px solid #ae8c69;
+  border-radius: 4px 4px 8px 8px;
+  background: linear-gradient(90deg, #46382f, #856244, #46382f);
+  box-shadow: 0 3px 5px #0008;
+}
+.lamp-cord {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  z-index: 12;
+  overflow: visible;
+}
+.lamp-cord__base {
+  fill: none;
+  stroke: #795238;
+  stroke-width: 8;
+  stroke-linecap: round;
+  filter: drop-shadow(2px 1px 2px #0008);
+}
+.lamp-cord__fiber {
+  fill: none;
+  stroke: #c49a6b;
+  stroke-width: 2;
+  stroke-dasharray: 2 6;
+  stroke-linecap: round;
+  opacity: 0.95;
+}
+.lamp-stage .lamp {
+  position: absolute;
+  z-index: 13;
+  left: 0;
+  top: 0;
+  width: clamp(115px, 10vw, 160px);
+  height: clamp(202px, 17vw, 281px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  transform-origin: 50% 3px;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+.lamp-stage .lamp.is-dragging {
+  cursor: grabbing;
+}
+.lamp-stage .lamp:before {
+  content: '';
+  position: absolute;
+  inset: -85px -95px -95px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 55%,
+    #fff4bfbb 0%,
+    #e9bd6852 17%,
+    #dfb66920 40%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.lamp-stage .lamp:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 42%;
+  left: 13%;
+  width: 74%;
+  height: 39%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #fff7c9cf, #ffd7846b 28%, transparent 72%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.lamp-stage .lamp.is-lit:before,
+.lamp-stage .lamp.is-lit:after {
+  opacity: 1;
+}
+.lamp-stage .lamp__image {
+  position: absolute;
+  inset: -13% -17.5%;
+  width: 135%;
+  height: 115%;
+  max-width: none;
+  object-fit: contain;
+  transform: rotate(180deg);
+  pointer-events: none;
+  opacity: 1;
+  transition: filter 0.4s ease;
+}
+.lamp-stage .lamp.is-lit .lamp__image {
+  filter: brightness(1.12) saturate(1.1) drop-shadow(0 0 18px #f6cc7b88);
+}
+.lamp-stage .lamp:not(.is-lit) .lamp__image {
+  filter: brightness(0.5) saturate(0.65);
+}
+@media (max-width: 850px) {
+  .lamp-stage .lamp {
+    width: 102px;
+    height: 178px;
+  }
+  .lamp-stage:before {
+    width: min(260px, 63vw);
+    height: min(260px, 63vw);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lamp-stage:before,
+  .lamp-stage .lamp:before,
+  .lamp-stage .lamp:after,
+  .lamp-stage .lamp__image {
+    transition: none;
+  }
+}

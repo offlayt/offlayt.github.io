@@ -1,0 +1,239 @@
+/* Independent columns; masonry.js calculates positions from actual card heights. */
+.project-grid {
+  --portfolio-columns: 3;
+  --portfolio-column-gap: 26px;
+  --portfolio-row-gap: 42px;
+  position: relative;
+}
+
+.project-card {
+  position: absolute;
+  top: var(--card-y, 0px);
+  left: var(--card-x, 0px);
+  width: var(--card-width, 100%);
+  min-width: 0;
+  isolation: isolate;
+  background: transparent;
+  border: 0;
+  overflow: visible;
+}
+
+.project-media {
+  position: relative;
+  overflow: hidden;
+  height: var(--media-height, 320px);
+  border-radius: 14px;
+  background: var(--project-bg, #1b1b22);
+}
+
+.project-media.is-switching {
+  transition: height 650ms var(--ease);
+}
+
+.project-open {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.project-open > img, .project-open > video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.project-open:focus-visible {
+  outline-offset: -5px;
+  border-radius: 14px;
+}
+
+.project-gallery-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 43px;
+  padding-top: 8px;
+}
+
+.project-slide-title {
+  min-width: 0;
+  flex: 1;
+  color: #bcb4c6;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.project-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+}
+
+.project-controls button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid #ffffff2b;
+  border-radius: 50%;
+  background: #1c1c24;
+  color: #e9e3ee;
+  font-size: 17px;
+}
+
+.project-controls [data-video-toggle] {
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.project-controls button:hover {
+  border-color: var(--accent);
+  background: #2c2730;
+}
+
+.project-position {
+  min-width: 34px;
+  text-align: center;
+  color: #c4bdcf;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.project-caption {
+  padding: 12px 2px 5px;
+}
+
+.project-status {
+  display: block;
+  margin: 0 0 8px;
+  color: #b9a6d8;
+  font-size: 10px;
+}
+
+.project-caption h3 {
+  margin-bottom: 12px;
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 750;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-tags button {
+  min-height: 30px;
+  padding: 5px 9px;
+  border: 1px solid #ffffff24;
+  border-radius: 7px;
+  background: #ffffff08;
+  color: #d1cad9;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.project-tags button.is-selected {
+  border-color: var(--type-color);
+  background: color-mix(in srgb, var(--type-color) 17%, #17151d);
+  color: var(--type-color);
+}
+
+.project-tags button:hover {
+  border-color: var(--type-color);
+}
+
+.project-description {
+  margin: 13px 0 0;
+  color: #bcb6c6;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.project-details {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+    width: 53.333px;
+    height: 53.333px;
+    padding: 0 0 12px 2px;
+    border: 1.5px solid #fff;
+  border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    font-size: 32px;
+  font-weight: 800;
+    letter-spacing: 2px;
+  line-height: 1;
+    text-shadow: 0 1px 4px #000b;
+  transform: translate(18%, -18%);
+  transition: background .2s;
+}
+
+.project-details:hover {
+    background: #ffffff18;
+}
+
+@media (max-width: 1100px) {
+  .project-grid {
+    --portfolio-columns: 2;
+    --portfolio-column-gap: 24px;
+  }
+}
+@media (max-width: 760px) {
+  .project-grid {
+    --portfolio-column-gap: 18px;
+  }
+  .project-caption h3 {
+    font-size: 24px;
+  }
+  .project-controls {
+    gap: 4px;
+  }
+  .project-controls button {
+    width: 32px;
+    height: 32px;
+  }
+  .project-gallery-bar {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 560px) {
+  .project-grid {
+    --portfolio-columns: 1;
+    --portfolio-row-gap: 32px;
+  }
+  .project-caption h3 {
+    font-size: 28px;
+  }
+  .project-controls button {
+    width: 36px;
+    height: 36px;
+  }
+  .project-tags button {
+    min-height: 34px;
+    font-size: 11px;
+  }
+  .project-description {
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-media.is-switching {
+    transition: none;
+  }
+}

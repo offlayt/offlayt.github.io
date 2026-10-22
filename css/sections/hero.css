@@ -1,0 +1,99 @@
+/* components/hero.css: component styles with their responsive rules. */
+
+.hero {
+  min-height: calc(100svh - 30px);
+  padding: calc(var(--header) + 70px) clamp(26px, 7.2vw, 104px) 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  pointer-events: none;
+  position: relative;
+  padding-top: calc(var(--header) + 105px);
+}
+.hero-copy {
+  width: 65%;
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: clamp(68px, 7.3vw, 120px);
+  line-height: 1.02;
+  font-weight: 500;
+  letter-spacing: -0.075em;
+  margin: 0 0 36px;
+}
+.hero h1 em {
+  color: var(--accent);
+  font-size: clamp(80px, 8.4vw, 142px);
+  font-weight: 800;
+  letter-spacing: -0.075em;
+  text-shadow: 0 0 48px #dfb66955;
+  display: block;
+  line-height: 0.98;
+}
+.hero-copy > p {
+  font-size: clamp(17px, 1.5vw, 23px);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #bcb8bb;
+}
+.hero:before {
+  content: '';
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 0;
+  height: 1px;
+  background: var(--line);
+}
+@media (max-width: 1100px) {
+  .hero h1 {
+    font-size: clamp(48px, 7.3vw, 76px);
+  }
+  .hero-copy {
+    width: 70%;
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    min-height: max(620px, calc(100svh - 20px));
+    padding: calc(var(--header) + 40px) 22px 170px;
+    justify-content: flex-start;
+  }
+  .hero-copy {
+    width: 84%;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 11vw, 68px);
+    line-height: 1.02;
+    margin: 0 0 22px;
+    letter-spacing: -0.075em;
+  }
+  .hero-copy > p {
+    font-size: 16px;
+    max-width: 24ch;
+  }
+}
+.hero-identity {
+  display: block;
+  color: #d9d8d2;
+  margin-bottom: 0.02em;
+}
+@media (max-width: 760px) {
+  .hero h1 em {
+    font-size: clamp(58px, 13.5vw, 92px);
+  }
+  .hero h1 {
+    margin-bottom: 18px;
+  }
+}
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 39px;
+  }
+  .hero h1 em {
+    font-size: 56px;
+  }
+  .hero-copy > p {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,19 @@
+/* components/surface-light.css: component styles with their responsive rules. */
+
+.light-surface:after,
+.design-card:after,
+.web-card:after,
+.project-card:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(
+    370px circle at var(--light-x, -500px) var(--light-y, -500px),
+    #ffe6b62b,
+    transparent 75%
+  );
+  opacity: var(--light-power, 0);
+  pointer-events: none;
+  transition: opacity 0.4s;
+}

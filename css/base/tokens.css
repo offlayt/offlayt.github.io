@@ -1,0 +1,19 @@
+/* base/tokens.css: component styles with their responsive rules. */
+
+:root {
+  color-scheme: dark;
+  --bg: #101116;
+  --paper: #f4f0eb;
+  --muted: #b8b7c0;
+  --accent: #dfb669;
+  --line: rgba(244, 240, 235, 0.13);
+  --header: 112px;
+  --gutter: clamp(24px, 2.2vw, 64px);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@media (max-width: 760px) {
+  :root {
+    --header: 72px;
+    --gutter: 20px;
+  }
+}

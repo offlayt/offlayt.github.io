@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://offlayt.github.io/sitemap.xml

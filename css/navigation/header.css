@@ -1,0 +1,139 @@
+/* components/header.css: component styles with their responsive rules. */
+
+.header {
+  height: var(--header);
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--gutter);
+  gap: 30px;
+  background: #101116ed;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s;
+}
+.logo {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+}
+.logo img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+.desktop-nav {
+  display: flex;
+  gap: clamp(8px, 1.2vw, 22px);
+  margin-left: auto;
+}
+.desktop-nav a {
+  font-size: clamp(15px, 1.18vw, 18px);
+  font-weight: 750;
+  position: relative;
+  padding: 0 clamp(16px, 1.55vw, 26px);
+  min-height: 64px;
+  display: inline-flex;
+  align-items: center;
+  isolation: isolate;
+}
+.desktop-nav a:after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  height: auto;
+  background: #f5f1e9;
+  transform: scale(0.18);
+  transform-origin: center;
+  transition:
+    transform 430ms var(--ease),
+    opacity 240ms,
+    border-radius 430ms;
+  inset: 3px -4px;
+  border-radius: 44% 56% 53% 47% / 55% 42% 58% 45%;
+  opacity: 0;
+  z-index: -1;
+}
+.desktop-nav a:hover:after,
+.desktop-nav a:focus-visible:after,
+.desktop-nav a[aria-current]:after {
+  transform: scale(1);
+  opacity: 1;
+  border-radius: 34px 28px 32px 27px;
+}
+.contact-trigger {
+  background: var(--accent);
+  color: #101116;
+  border-radius: 14px;
+  padding: 16px 24px;
+  margin-left: 20px;
+  font-weight: 750;
+  font-size: clamp(15px, 1.18vw, 18px);
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  transition: background 0.2s;
+  min-height: 64px;
+}
+.contact-trigger:hover {
+  background: var(--accent);
+}
+.burger {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #ffffff06;
+  place-content: center;
+  gap: 6px;
+}
+.burger span {
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: var(--paper);
+  transition: transform 0.3s;
+}
+.burger[aria-expanded='true'] span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.burger[aria-expanded='true'] span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+@media (max-width: 760px) {
+  .header {
+    padding-inline: 20px;
+    justify-content: space-between;
+  }
+  .logo {
+    width: 42px;
+    height: 42px;
+  }
+  .logo img {
+    width: 54px;
+    height: 54px;
+    max-width: none;
+  }
+  .desktop-nav,
+  .contact-trigger {
+    display: none;
+  }
+  .burger {
+    display: grid;
+  }
+}
+.desktop-nav a:hover,
+.desktop-nav a:focus-visible,
+.desktop-nav a[aria-current] {
+  color: #17151c;
+}
+.contact-trigger > span {
+  font-size: 24px;
+  font-weight: 400;
+}

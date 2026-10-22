@@ -1,0 +1,37 @@
+{
+  "mode": "built-in image_gen",
+  "purpose": "Демонстрационные изображения видов дизайн-услуг",
+  "transparent_background": true,
+  "assets": [
+    {
+      "name": "brand-identity",
+      "prompt": "Use case: product-mockup. Asset type: demonstration illustration for a dark Russian design studio website service card. Generate a polished photorealistic 3D product mockup, warm cream paper, deep violet and muted golden yellow details, refined tactile print textures, soft studio shadows, coherent contemporary editorial design. Square composition, the complete object group isolated with a genuinely transparent alpha background, comfortable 10% clear margin all around, no surrounding room or floor, no watermark, no real client brands, no explanatory labels or headings. Avoid tiny illegible paragraphs; use clean abstract typographic bars and geometric graphics where necessary. Subject: a coordinated brand identity stationery kit: cream letterhead, violet folder, two business cards and a small golden seal, arranged in a compact attractive overlapping flat lay with a slight three-quarter view. Repeat the same simple geometric sun emblem across items. The collection must communicate a consistent visual identity, every item fully visible. No standalone title text.",
+      "file": "assets/services/design/brand-identity.webp"
+    },
+    {
+      "name": "business-cards",
+      "prompt": "Use case: product-mockup. Asset type: demonstration illustration for a dark Russian design studio website service card. Generate a polished photorealistic 3D product mockup, warm cream paper, deep violet and muted golden yellow details, refined tactile print textures, soft studio shadows, coherent contemporary editorial design. Square composition, the complete object group isolated with a genuinely transparent alpha background, comfortable 10% clear margin all around, no surrounding room or floor, no watermark, no real client brands, no explanatory labels or headings. Avoid tiny illegible paragraphs; use clean abstract typographic bars and geometric graphics where necessary. Subject: two substantial stacks of premium business cards, one cream face with a small violet geometric sun emblem and elegant minimal line layout, the other deep violet with large muted golden graphic. Overlapping stacks viewed at a three-quarter angle, realistic paper edges and subtle letterpress. Large, simple, recognizable silhouette. No floating extra objects, no readable names.",
+      "file": "assets/services/design/business-cards.webp"
+    },
+    {
+      "name": "logo-design",
+      "prompt": "Use case: product-mockup. Asset type: demonstration illustration for a dark Russian design studio website service card. Generate a polished photorealistic 3D product mockup, warm cream paper, deep violet and muted golden yellow details, refined tactile print textures, soft studio shadows, coherent contemporary editorial design. Square composition, the complete object group isolated with a genuinely transparent alpha background, comfortable 10% clear margin all around, no surrounding room or floor, no watermark, no real client brands, no explanatory labels or headings. Avoid tiny illegible paragraphs; use clean abstract typographic bars and geometric graphics where necessary. Subject: a large cream logo exploration board tilted slightly in perspective, showing a geometric sun symbol in violet on a subtle construction grid, and a separate small thick golden sun emblem resting in front of the board. The symbol is simple and balanced; the grid is understated. Communicate logo design as a physical designer's mockup, not a plain icon. No words.",
+      "file": "assets/services/design/logo-design.webp"
+    },
+    {
+      "name": "advertising-graphics",
+      "prompt": "Use case: product-mockup. Asset type: demonstration illustration for a dark Russian design studio website service card. Generate a polished photorealistic 3D product mockup, warm cream paper, deep violet and muted golden yellow details, refined tactile print textures, soft studio shadows, coherent contemporary editorial design. Square composition, the complete object group isolated with a genuinely transparent alpha background, comfortable 10% clear margin all around, no surrounding room or floor, no watermark, no real client brands, no explanatory labels or headings. Avoid tiny illegible paragraphs; use clean abstract typographic bars and geometric graphics where necessary. Subject: an energetic compact arrangement of three printed advertising posters and a small landscape banner card. Their coordinated layouts use very large violet geometric circles, golden sun shapes, cream negative space and bold abstract typographic blocks. One poster in front, two slightly fanned behind, all their edges fully visible. Beautiful graphic design, no readable copy or brand names.",
+      "file": "assets/services/design/advertising-graphics.webp"
+    },
+    {
+      "name": "mascots-stickers",
+      "prompt": "Use case: product-mockup. Asset type: demonstration illustration for a dark Russian design studio website service card. Generate a polished photorealistic 3D product mockup, warm cream paper, deep violet and muted golden yellow details, refined tactile print textures, soft studio shadows, coherent contemporary editorial design. Square composition, the complete object group isolated with a genuinely transparent alpha background, comfortable 10% clear margin all around, no surrounding room or floor, no watermark, no real client brands, no explanatory labels or headings. Avoid tiny illegible paragraphs; use clean abstract typographic bars and geometric graphics where necessary. Subject: a cheerful original lightbulb mascot with a cream glass head, warm golden glow inside, tiny dark violet shoes and gloves, giving a friendly wave, plus three physical die-cut stickers of the same mascot in simple different expressions arranged beside it. Sculptural toy-like 3D finish, charming clean silhouette, accurate lightbulb socket, no human face, no text.",
+      "file": "assets/services/design/mascots-stickers.webp"
+    },
+    {
+      "name": "presentations",
+      "prompt": "Use case: product-mockup. Asset type: demonstration illustration for a dark Russian design studio website service card. Generate a polished photorealistic 3D product mockup, warm cream paper, deep violet and muted golden yellow details, refined tactile print textures, soft studio shadows, coherent contemporary editorial design. Square composition, the complete object group isolated with a genuinely transparent alpha background, comfortable 10% clear margin all around, no surrounding room or floor, no watermark, no real client brands, no explanatory labels or headings. Avoid tiny illegible paragraphs; use clean abstract typographic bars and geometric graphics where necessary. Subject: three floating landscape presentation slides arranged as a compact layered fan, all slide corners fully visible. Foreground cream slide contains a beautiful large deep violet donut chart with one golden segment and clean abstract headline bars; second violet slide has a simple golden upward bar chart; third cream slide has an orderly minimal layout. Professional presentation design, not printed school posters, no laptop or screen frame, no readable text.",
+      "file": "assets/services/design/presentations.webp"
+    }
+  ]
+}

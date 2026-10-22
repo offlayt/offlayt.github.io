@@ -1,0 +1,195 @@
+/* components/design-services.css: component styles with their responsive rules. */
+
+.design-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.design-card {
+  position: relative;
+  min-width: 0;
+  border: 1px solid #ffffff17;
+  border-radius: 23px;
+  overflow: hidden;
+  background: var(--card-bg, #2b292c);
+  transition:
+    border-color 0.3s,
+    transform 0.4s var(--ease),
+    box-shadow 0.3s;
+  isolation: isolate;
+}
+.design-card:nth-child(3n + 1) {
+  grid-column: 1/-1;
+}
+.design-card:hover {
+  transform: translateY(-3px);
+  border-color: #ffffff66;
+}
+.design-card[open] {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.design-card summary {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.design-card summary::-webkit-details-marker {
+  display: none;
+}
+.design-visual {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  padding: 22px;
+  background: radial-gradient(circle at 50% 40%, #ac9bea22, transparent 80%);
+}
+.design-card:nth-child(3n + 1) .design-visual {
+  height: 285px;
+}
+.design-visual img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  transition: transform 0.65s var(--ease);
+  filter: drop-shadow(0 15px 15px #0002);
+}
+.design-card:hover .design-visual img {
+  transform: rotate(-3deg) scale(1.04);
+}
+.design-card:nth-child(3n + 1) .design-visual img {
+  object-fit: contain;
+  width: 100%;
+  margin: auto;
+  transform: rotate(-3deg);
+}
+.design-card:nth-child(3n + 1):hover .design-visual img {
+  transform: rotate(-1deg) scale(1.04);
+}
+.design-caption {
+  padding: 20px 22px 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 9px 15px;
+  background: linear-gradient(0deg, #00000020, transparent);
+}
+.design-caption h4 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  font-size: clamp(25px, 2.3vw, 36px);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  margin: 0;
+}
+.design-caption p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  grid-column: 1/-1;
+  color: #b8b7c0;
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 280px;
+}
+.design-detail {
+  position: relative;
+  z-index: 2;
+  padding: 0 22px 24px;
+  color: #eeeaddc0;
+  font-size: 13px;
+  line-height: 1.7;
+  animation: detail-in 0.35s var(--ease);
+}
+.design-card[open] .design-caption h4 {
+  color: var(--accent);
+}
+@media (min-width: 1600px) {
+  .design-visual {
+    height: 270px;
+  }
+  .design-card:nth-child(3n + 1) .design-visual {
+    height: 340px;
+  }
+}
+@media (max-width: 1100px) {
+  .design-grid {
+    gap: 12px;
+  }
+  .design-caption {
+    padding: 17px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .design-caption h4 {
+    font-size: 25px;
+  }
+  .design-caption .service-price {
+    grid-row: 2;
+    grid-column: 1/-1;
+  }
+  .design-caption p {
+    grid-row: 3;
+  }
+  .design-visual {
+    height: 180px;
+    padding: 15px;
+  }
+  .design-card:nth-child(3n + 1) .design-visual {
+    height: 235px;
+  }
+}
+@media (max-width: 760px) {
+  .design-grid {
+    gap: 12px;
+  }
+  .design-card:nth-child(3n + 1) .design-visual {
+    height: 250px;
+  }
+  .design-visual {
+    height: 190px;
+    padding: 20px;
+  }
+  .design-caption {
+    padding: 18px;
+  }
+  .design-card:nth-child(3n + 1) .design-caption .service-price {
+    grid-row: auto;
+    grid-column: auto;
+  }
+  .design-card:nth-child(3n + 1) .design-caption p {
+    grid-row: auto;
+  }
+}
+@media (max-width: 420px) {
+  .design-visual {
+    height: 150px;
+    padding: 13px;
+  }
+  .design-caption {
+    padding: 15px;
+  }
+  .design-caption p {
+    font-size: 10px;
+  }
+  .design-card:nth-child(3n + 1) .design-visual {
+    height: 230px;
+  }
+}
+@media (max-width: 760px) {
+  .design-caption h4 {
+    font-size: 25px;
+  }
+  .design-caption .service-price {
+    font-size: 16px;
+  }
+  .design-caption p {
+    font-size: 12px;
+  }
+}
+@media (max-width: 420px) {
+  .design-caption h4 {
+    font-size: 23px;
+  }
+}

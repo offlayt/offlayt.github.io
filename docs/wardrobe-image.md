@@ -1,0 +1,9 @@
+# Шкаф для мобильного меню
+
+Генерация: встроенный ImageGen, прозрачный фон. Исходный PNG сохранён инструментом в его стандартной папке; рабочая копия с альфа-каналом преобразована в WebP без изменения композиции.
+
+Рабочий файл: `assets/navigation/soviet-wardrobe.webp` (1024 × 1536). Из изображения используется фрагмент текстуры дверцы. В текущем меню видна только её внутренняя сторона: рама, поперечные планки, петли и латунные таблички собраны HTML/CSS-слоями; корпус и полки отсутствуют. Надписи остаются настоящими ссылками и кнопками. Ниже сохранён исходный промпт генерации текстуры, а не описание финального интерфейса.
+
+## Финальный промпт
+
+Use case: product-mockup. Asset type: transparent cutout for an animated mobile navigation on a dark Russian design studio website. Generate one photorealistic Soviet 1960s single-door wooden wardrobe / шифоньер. Exactly straight-on front orthographic view, no visible side panel, no perspective angle. Warm walnut and amber polished veneer, gently worn, elegant midcentury rounded top cornice and two short tapered front legs. ONE single large tall rectangular CLOSED door with a small old brass pull at its right edge and left-side hinges. Door surface is quiet beautiful walnut wood grain, mostly flat, not mirrored. Outer cabinet frame only modest thickness, with door occupying about x10%-90% and y9%-89% of the furniture bounding box. Entire wardrobe including legs must be visible, tightly framed with only a 3 percent transparent margin, portrait composition. The cabinet should feel like a tactile vintage household object, consistent with photographic retro rotary phone and old CRT television cutouts. Warm studio light, realistic material, subtle highlights. NO room, NO floor, NO wall, NO surrounding objects, NO plants, NO clothes visible, NO typography, NO labels, NO people. Genuine transparent alpha outside the wardrobe and between the legs. Do not bake any interface into the image.
