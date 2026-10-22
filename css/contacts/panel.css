@@ -50,9 +50,7 @@
 .is-book[open] .contact-leaf { animation: contact-page-open 1150ms cubic-bezier(.25,.65,.35,1) both; }
 .is-book.is-closing .contact-leaf { animation: contact-page-close 600ms cubic-bezier(.5,0,.7,1) both; }
 .contact-heading { margin-bottom: 28px; }
-.contact-eyebrow { color: #927343; font-size: 9px; letter-spacing: .18em; }
 .contact-drawer h2 { margin-top: 12px; font: 700 clamp(29px, 4.7vw, 40px)/1.08 Georgia, 'Times New Roman', serif; letter-spacing: -.035em; }
-.contact-description { margin-top: 12px !important; font-size: 12px; line-height: 1.6; color: var(--muted-ink); }
 .contact-stage { position: relative; }
 .contact-furniture { display: none; margin: 0; }
 .contact-groups { display: grid; gap: 24px; }
@@ -73,7 +71,28 @@
 .channel-icon img { display: block; width: 100%; height: 100%; filter: sepia(1) saturate(.7); }
 .contact-drawer :focus-visible { outline: 2px solid #93602a; outline-offset: 3px; }
 .contact-drawer .contact-close:focus-visible { outline-color: #e8ca8b; }
-.contact-note { margin-top: 26px !important; padding-top: 15px; border-top: 1px solid #9b7b4844; color: #927343; font: italic 12px/1.5 Georgia, serif; }
+/* The address book keeps only its title, two subjects and their descriptions. */
+.is-book h2 { margin-top: 0; font-size: clamp(32px, 5vw, 42px); }
+.is-book .contact-group h3 { font-size: 34px; }
+.is-book .contact-group > p { margin: 9px 0 18px; font-size: 13px; }
+.is-book .contact-groups { gap: 30px; }
+.is-book .contact-channels { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.is-book .contact-group:last-child .contact-channels { grid-template-columns: 1fr; }
+.is-book .contact-channels > a {
+  justify-content: center;
+  min-height: 112px;
+  padding: 18px;
+  border: 1px solid #9b7b4866;
+  border-radius: 4px;
+  background: #b38a3e12;
+  box-shadow: inset 0 0 0 3px #f3e7ce66, 0 3px 0 #b1987033;
+}
+.is-book .contact-channels > a:hover,
+.is-book .contact-channels > a.is-channel { background: #9d71272a; border-color: #93672f; }
+.is-book .contact-channels > a > span:not(.channel-icon) { display: none; }
+.is-book .channel-icon { width: 52px; height: 52px; }
+.is-book .channel-icon svg { width: 32px; height: 32px; }
+.is-book .channel-icon--max { border-radius: 13px; }
 /* Furniture lands on the original consultation pill. No rectangular panel. */
 .contact-drawer.is-consult { --prop-width: clamp(150px, 32vw, 250px); --card-width: clamp(134px, 25vw, 205px); padding: 0; }
 .is-consult[open] { animation: none; }
@@ -84,7 +103,6 @@
   overflow: visible; transform: none; backface-visibility: visible;
 }
 .is-consult .contact-heading { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.is-consult .contact-note { display: none; }
 .is-consult .contact-stage { height: calc(var(--prop-width) * 1.65); }
 .is-consult .contact-furniture { display: block; position: absolute; left: var(--consult-x, 50%); bottom: 0; width: var(--prop-width); height: 100%; transform: translateX(-50%); }
 .contact-cabinet { position: absolute; bottom: -7.3%; left: 0; width: 100%; height: auto; filter: drop-shadow(0 15px 15px #0008); }
@@ -137,6 +155,8 @@
   .contact-leaf { padding: 24px 22px; }
   .contact-heading { margin-bottom: 21px; }
   .contact-groups { gap: 20px; }
+  .is-book .contact-groups { gap: 25px; }
+  .is-book .contact-channels > a { min-height: 96px; padding: 15px; }
   .contact-drawer.is-consult { --prop-width: 150px; --card-width: 134px; }
   .is-consult .contact-group { padding: 17px 12px 15px; bottom: 25px; }
   .is-consult .contact-group + .contact-group { bottom: 10px; }
