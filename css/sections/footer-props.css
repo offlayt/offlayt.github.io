@@ -1,0 +1,74 @@
+.tv-boat {
+  position: absolute;
+  z-index: 3;
+  right: 7%;
+  bottom: 94%;
+  width: 24%;
+  height: auto;
+  pointer-events: none;
+  filter: brightness(0.85) drop-shadow(0 3px 2px #0009);
+}
+.radio-corner {
+  position: absolute;
+  z-index: 2;
+  width: var(--radio-width);
+  left: calc(50% - var(--tv-width) * 0.5 - var(--radio-width) * 1.08);
+  bottom: calc(100% - var(--room-horizon) - var(--tv-floor-offset) + 32px);
+}
+.radio-corner:before {
+  content: '';
+  position: absolute;
+  left: 9%;
+  right: 8%;
+  bottom: 0;
+  height: 8%;
+  border-radius: 50%;
+  background: #000b;
+  filter: blur(7px);
+}
+.radio-stool {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  filter: brightness(0.74) saturate(0.8) drop-shadow(0 4px 3px #0008);
+}
+.radio-button {
+  position: absolute;
+  left: -5%;
+  bottom: 90%;
+  width: 110%;
+  padding: 0;
+  background: none;
+  border-radius: 8px;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.radio-button > img {
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  filter: brightness(0.84) saturate(0.8) drop-shadow(0 3px 2px #0008);
+}
+.radio-dial-light {
+  position: absolute;
+  left: 38%;
+  bottom: 9%;
+  width: 23%;
+  height: 8%;
+  border-radius: 5px;
+  background: #e9c76c;
+  mix-blend-mode: screen;
+  opacity: 0;
+  box-shadow: 0 0 14px #e9c76c66;
+  transition: opacity 0.8s;
+  pointer-events: none;
+}
+.radio-button.is-playing .radio-dial-light {
+  opacity: 0.36;
+}
+@media (max-width: 760px) {
+  .radio-corner {
+    left: clamp(-6px, calc((100vw - 390px) * 0.08), 20px);
+    bottom: calc(100% - var(--room-horizon) - var(--tv-floor-offset) + 24px);
+  }
+}

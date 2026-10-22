@@ -1,0 +1,11 @@
+# Local high-resolution/source media; the site uses optimized copies.
+/.source-media/
+/assets/tv/ну-погоди-бокс.mp4
+/assets/demos/*/desktop.gif
+/assets/works/mascots/mascots-01.gif
+
+# Local development and verification artifacts.
+/node_modules/
+/output/
+/tmp/
+/.playwright-cli/

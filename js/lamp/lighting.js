@@ -4,6 +4,7 @@ import { query, queryAll } from '../core/dom.js';
 export class SurfaceLighting {
   constructor(scene, requestRender) {
     this.scene = scene;
+    this.wallpaper = query('.wallpaper');
     this.surfaces = queryAll('.light-surface');
     const grid = query('#project-grid');
     if (grid) {
@@ -27,6 +28,12 @@ export class SurfaceLighting {
       rect: element.getBoundingClientRect(),
     }));
     // Keep all geometry reads above all writes to avoid repeated layout flushes.
+    if (this.wallpaper) {
+      // The wall is fixed to the viewport; the lamp scene starts below the header.
+      this.wallpaper.style.setProperty('--wall-light-x', `${scene.left + x}px`);
+      this.wallpaper.style.setProperty('--wall-light-y', `${scene.top + y}px`);
+      this.wallpaper.style.setProperty('--wall-light-power', lit ? '1' : '0');
+    }
     surfaces.forEach(({ element, rect }) => {
       const visible = rect.bottom >= 0 && rect.top <= innerHeight;
       const power = lit && visible ? '1' : '0';

@@ -21,7 +21,7 @@ export const projectCatalog = [
         ],
         "title": "Публичный сайт",
         "src": "demos/media/rostok-site.mp4",
-        "ratio": 1.77778,
+        "ratio": 2.09934,
         "video": true,
         "poster": "assets/demos/rostok/desktop.jpg"
       },
@@ -41,7 +41,7 @@ export const projectCatalog = [
         ],
         "title": "Панель управления",
         "src": "demos/media/rostok-panel.mp4",
-        "ratio": 1.77778,
+        "ratio": 2.11038,
         "video": true,
         "poster": "assets/demos/rostok/panel.jpg"
       },
@@ -543,8 +543,10 @@ export const projectCatalog = [
           "site"
         ],
         "title": "Сайт в работе",
-        "src": "assets/demos/lune/desktop.gif",
-        "ratio": 2.16629
+        "src": "assets/demos/lune/desktop.mp4",
+        "ratio": 2.16629,
+        "video": true,
+        "poster": "assets/demos/lune/desktop.webp"
       },
       {
         "type": "site",
@@ -597,7 +599,7 @@ export const projectCatalog = [
         ],
         "title": "Публичный сайт",
         "src": "demos/media/clinic-site.mp4",
-        "ratio": 1.77778,
+        "ratio": 2.09231,
         "video": true,
         "poster": "assets/demos/clinic/desktop.jpg"
       },
@@ -617,7 +619,7 @@ export const projectCatalog = [
         ],
         "title": "Панель управления",
         "src": "demos/media/clinic-panel.mp4",
-        "ratio": 1.77778,
+        "ratio": 2.08772,
         "video": true,
         "poster": "assets/demos/clinic/panel.jpg"
       },
@@ -660,8 +662,10 @@ export const projectCatalog = [
           "site"
         ],
         "title": "Сайт в работе",
-        "src": "assets/demos/forma/desktop.gif",
-        "ratio": 2.09451
+        "src": "assets/demos/forma/desktop.mp4",
+        "ratio": 2.09451,
+        "video": true,
+        "poster": "assets/demos/forma/desktop.webp"
       },
       {
         "type": "site",
@@ -778,8 +782,10 @@ export const projectCatalog = [
           "site"
         ],
         "title": "Сайт в работе",
-        "src": "assets/demos/aititek/desktop.gif",
-        "ratio": 2.10375
+        "src": "assets/demos/aititek/desktop.mp4",
+        "ratio": 2.10375,
+        "video": true,
+        "poster": "assets/demos/aititek/desktop.webp"
       },
       {
         "type": "site",
@@ -829,8 +835,10 @@ export const projectCatalog = [
           "site"
         ],
         "title": "Сайт в работе",
-        "src": "assets/demos/slow-club/desktop.gif",
-        "ratio": 2.17352
+        "src": "assets/demos/slow-club/desktop.mp4",
+        "ratio": 2.17352,
+        "video": true,
+        "poster": "assets/demos/slow-club/desktop.webp"
       },
       {
         "type": "site",
@@ -881,8 +889,10 @@ export const projectCatalog = [
           "site"
         ],
         "title": "Сервис в работе",
-        "src": "assets/demos/tasktracker/desktop.gif",
-        "ratio": 2.08114
+        "src": "assets/demos/tasktracker/desktop.mp4",
+        "ratio": 2.08114,
+        "video": true,
+        "poster": "assets/demos/tasktracker/desktop.webp"
       },
       {
         "type": "site",
@@ -1196,7 +1206,8 @@ export const projectCatalog = [
         "title": "Анимация",
         "src": "assets/works/logos/logos-06.mp4",
         "ratio": 1.77778,
-        "video": true
+        "video": true,
+        "poster": "assets/works/logos/logos-06-poster.webp"
       }
     ]
   },
@@ -1574,8 +1585,10 @@ export const projectCatalog = [
           "mascots"
         ],
         "title": "Анимация",
-        "src": "assets/works/mascots/mascots-01.gif",
-        "ratio": 1.77917
+        "src": "assets/works/mascots/mascots-01.mp4",
+        "ratio": 1.77917,
+        "video": true,
+        "poster": "assets/works/mascots/mascots-01-poster.webp"
       }
     ]
   },

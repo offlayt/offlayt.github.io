@@ -3,6 +3,7 @@
 @import url('./base/tokens.css');
 @import url('./base/reset.css');
 @import url('./base/layout.css');
+@import url('./lamp/wallpaper.css');
 @import url('./navigation/header.css');
 @import url('./sections/hero.css');
 @import url('./services/layout.css');
@@ -10,7 +11,9 @@
 @import url('./services/design.css');
 @import url('./shared/surface-light.css');
 @import url('./navigation/wardrobe.css');
-@import url('./sections/outro.css');
-@import url('./sections/footer.css');
+@import url('./sections/outro.css?v=20261022-radio');
+@import url('./sections/footer.css?v=20261022-radio');
+@import url('./sections/footer-tv.css?v=20261022-tv2');
+@import url('./sections/footer-props.css');
 @import url('./lamp/scene.css');
 @import url('./base/motion.css');
