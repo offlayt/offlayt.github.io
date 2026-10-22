@@ -4,7 +4,7 @@ import { initNavigation } from './navigation/index.js';
 import { initLamps } from './lamp/index.js?v=20261022-retract';
 import { initScrollReveal } from './scroll-reveal.js?v=20261022-room';
 import { initRetroTV } from './footer/television.js';
-import { initRoomRadio } from './footer/radio.js';
+import { initRoomRadio } from './footer/radio.js?v=20261022-playlist';
 
 document.documentElement.classList.add('enhanced');
 initServices();
