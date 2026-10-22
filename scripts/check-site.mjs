@@ -47,6 +47,8 @@ for (const file of [...known].filter(file => /\.(html|css|js|mjs|md)$/.test(file
   }
 }
 const { projectCatalog } = await import('../js/data/project-catalog.js');
+const { radioTracks } = await import('../js/data/radio-tracks.js');
+for (const track of radioTracks) check('index.html', track);
 for (const project of projectCatalog) for (const slide of project.slides) {
   for (const reference of [...(slide.images || [slide.src]), ...(slide.poster ? [slide.poster] : [])]) check('index.html', reference);
   assert.ok(!slide.src.endsWith('.gif'), `${project.id}: heavy GIF should use optimized video`);

@@ -1,5 +1,7 @@
-/** User-powered radio: quiet band-limited music, valve hiss and gentle fades. */
-export function initRoomRadio() {
+import { radioTracks } from '../data/radio-tracks.js';
+
+/** User-powered radio: a finite playlist, valve hiss and gentle fades. */
+export function initRoomRadio(tracks = radioTracks) {
   const button = document.querySelector('.radio-button');
   const audio = document.querySelector('.radio-audio');
   if (!button || !audio) return;
@@ -8,6 +10,8 @@ export function initRoomRadio() {
   let enabled = false;
   let stopTimer;
   let revision = 0;
+  let trackIndex = 0;
+  audio.loop = false;
 
   function createGraph() {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -53,8 +57,23 @@ export function initRoomRadio() {
     button.setAttribute('aria-label', enabled ? 'Выключить радио' : 'Включить радио');
   }
 
+  function playTrack(currentRevision) {
+    if (audio.getAttribute('src') !== tracks[trackIndex] || audio.ended || audio.error) {
+      audio.src = tracks[trackIndex];
+    }
+    // Both calls originate from the click on first start (including on mobile).
+    Promise.all([graph.context.resume(), audio.play()]).catch(() => {
+      if (enabled && currentRevision === revision) setEnabled(false);
+    });
+  }
+
   function setEnabled(next) {
-    graph ||= createGraph();
+    if (next && !tracks.length) return;
+    try {
+      graph ||= createGraph();
+    } catch {
+      return;
+    }
     if (!graph) return;
     enabled = next;
     const currentRevision = ++revision;
@@ -67,33 +86,40 @@ export function initRoomRadio() {
     master.gain.linearRampToValueAtTime(enabled ? 0.16 : 0, now + (enabled ? 1.4 : 0.7));
 
     if (enabled) {
-      context.resume().then(() => {
-        if (!enabled || currentRevision !== revision) return;
-        // The user will supply the music later. Empty configuration plays only
-        // tuning hiss and never requests a nonexistent MP3 from the server.
-        const source = button.dataset.radioSrc;
-        if (!source) return;
-        if (!audio.getAttribute('src')) audio.src = source;
-        audio.play().catch(() => {});
-      }).catch(() => {
-        if (currentRevision === revision) setEnabled(false);
-      });
+      playTrack(currentRevision);
     } else {
       stopTimer = setTimeout(() => {
         if (enabled) return;
         audio.pause();
-        context.suspend();
+        context.suspend().catch(() => {});
       }, 750);
     }
   }
 
   button.addEventListener('click', () => setEnabled(!enabled));
+  audio.addEventListener('ended', () => {
+    if (!enabled) return;
+    trackIndex++;
+    if (trackIndex < tracks.length) {
+      playTrack(++revision);
+    } else {
+      trackIndex = 0;
+      setEnabled(false);
+    }
+  });
+  audio.addEventListener('error', () => {
+    if (enabled) setEnabled(false);
+  });
   window.addEventListener('pagehide', () => {
     clearTimeout(stopTimer);
     enabled = false;
     revision++;
     audio.pause();
-    graph?.context.suspend();
+    if (graph) {
+      graph.master.gain.cancelScheduledValues(graph.context.currentTime);
+      graph.master.gain.value = 0;
+      graph.context.suspend().catch(() => {});
+    }
     paint();
   });
 }
