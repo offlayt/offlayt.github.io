@@ -1,4 +1,5 @@
 import { radioTracks } from '../data/radio-tracks.js';
+import { createRadioTitle } from './radio-title.js?v=20261023-spectrum-bars';
 
 /** User-powered radio: a finite playlist, valve hiss and gentle fades. */
 export function initRoomRadio(tracks = radioTracks) {
@@ -11,6 +12,11 @@ export function initRoomRadio(tracks = radioTracks) {
   let stopTimer;
   let revision = 0;
   let trackIndex = 0;
+  const title = createRadioTitle(audio, () => enabled, () => {
+    if (!graph) return null;
+    graph.analyser.getByteFrequencyData(graph.spectrum);
+    return { bins: graph.spectrum, sampleRate: graph.context.sampleRate, fftSize: graph.analyser.fftSize };
+  });
   audio.loop = false;
 
   function createGraph() {
@@ -31,7 +37,13 @@ export function initRoomRadio(tracks = radioTracks) {
     compressor.threshold.value = -20;
     compressor.ratio.value = 3;
     const music = context.createMediaElementSource(audio);
-    music.connect(highpass).connect(lowpass).connect(compressor).connect(master);
+    const analyser = context.createAnalyser();
+    analyser.fftSize = 512;
+    analyser.smoothingTimeConstant = 0.25;
+    analyser.minDecibels = -85;
+    analyser.maxDecibels = -5;
+    // Measure the filtered music before volume control; exclude the hiss below.
+    music.connect(highpass).connect(lowpass).connect(compressor).connect(analyser).connect(master);
 
     // A seamless, very quiet analogue noise bed; no sound exists before a click.
     const buffer = context.createBuffer(1, context.sampleRate * 2, context.sampleRate);
@@ -48,10 +60,11 @@ export function initRoomRadio(tracks = radioTracks) {
     noiseGain.gain.value = 0.018;
     noise.connect(noiseFilter).connect(noiseGain).connect(master);
     noise.start();
-    return { context, master };
+    return { context, master, analyser, spectrum: new Uint8Array(analyser.frequencyBinCount) };
   }
 
   function paint() {
+    if (!enabled) title.stop();
     button.classList.toggle('is-playing', enabled);
     button.setAttribute('aria-pressed', String(enabled));
     button.setAttribute('aria-label', enabled ? 'Выключить радио' : 'Включить радио');
