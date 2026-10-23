@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { telephonePlacement } from '../js/contacts/placement.js';
+const social = { left: 1200, top: 807, width: 58, height: 58 };
+const hiddenPill = { left: 0, top: 0, width: 0, height: 0 };
+assert.deepEqual(telephonePlacement(hiddenPill, social, 1366, 900, 250), { x: 683, bottom: 93 }, 'CSS-hidden desktop pill must not place furniture above the screen');
+assert.deepEqual(telephonePlacement(null, social, 1366, 900, 250), { x: 683, bottom: 93 }, 'Collapsed pill uses the clicked social button');
+const pill = { left: 14, top: 782, width: 254, height: 50 };
+assert.deepEqual(telephonePlacement(pill, social, 390, 844, 150), { x: 141, bottom: 62 }, 'Visible phone pill remains the foundation');
+assert.equal(telephonePlacement({ left: 0, top: 782, width: 10, height: 50 }, social, 390, 844, 150).x, 83, 'Furniture stays inside the viewport');
+console.log('Validated desktop CSS-hidden pill, collapsed pill, mobile foundation and edge clamping.');

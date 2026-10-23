@@ -1,4 +1,4 @@
-import { workTypes } from '../data/projects.js';
+import { workTypes } from '../data/projects.js?v=20261023-new-works';
 import { orderAllProjects } from './order.js';
 
 export const normalizeQuery = (value) => value.trim().toLocaleLowerCase('ru');

@@ -1,6 +1,125 @@
 // Portfolio content. Media stays in assets/works/<discipline> and demos/media.
 export const projectCatalog = [
   {
+    "id": "glamorous-tulip",
+    "name": "Glamorous Tulip",
+    "status": "Для косметолога",
+    "description": "Двусторонняя визитка Glamorous Tulip: цветочная графика, типографика и оформление контактов.",
+    "search": "визитка косметолог тюльпан beauty skincare tulip cards print",
+    "types": [
+      "cards"
+    ],
+    "color": "#1b1b22",
+    "slides": [
+      {
+        "type": "cards",
+        "types": [
+          "cards"
+        ],
+        "title": "Glamorous Tulip — две стороны визитки",
+        "src": "assets/works/print/glamorous-tulip-cards.webp",
+        "ratio": 1.0
+      }
+    ]
+  },
+  {
+    "id": "vlk-atelier",
+    "name": "VLK Atelier",
+    "status": "Для дизайнера одежды",
+    "description": "Визитка VLK Atelier: контрастная типографика и фактура в чёрно-белой композиции.",
+    "search": "визитка дизайнер одежды ателье fashion vlk atelier cards print",
+    "types": [
+      "cards"
+    ],
+    "color": "#1b1b22",
+    "slides": [
+      {
+        "type": "cards",
+        "types": [
+          "cards"
+        ],
+        "title": "VLK Atelier — визитка дизайнера одежды",
+        "src": "assets/works/print/vlk-atelier-cards.webp",
+        "ratio": 1.24955
+      }
+    ]
+  },
+  {
+    "id": "arka-cafe",
+    "name": "Арка · кафе",
+    "status": "Логотип и носители",
+    "description": "Логотип кафе «Арка»: знак с аркой и столовыми приборами, варианты написания и применение на носителях.",
+    "search": "кафе арка логотип европейская кухня меню стакан визитки cafe arka logos",
+    "types": [
+      "logos"
+    ],
+    "color": "#1b1b22",
+    "slides": [
+      {
+        "type": "logos",
+        "types": [
+          "logos"
+        ],
+        "title": "Знак кафе — вариант CAFÉ",
+        "src": "assets/works/logos/arka-cafe-mark.webp",
+        "ratio": 1.0
+      },
+      {
+        "type": "logos",
+        "types": [
+          "logos"
+        ],
+        "title": "Арка — логотип и применение на носителях",
+        "src": "assets/works/logos/arka-cafe-applications.webp",
+        "ratio": 1.0
+      }
+    ]
+  },
+  {
+    "id": "inside-the-wave",
+    "name": "Внутри волны",
+    "status": "Плакатная графика",
+    "description": "Постер «Внутри волны»: объёмная типографика, контрастные цвета и психоделическая графика.",
+    "search": "постер внутри волны плакат психоделика яркий цвет posters waves",
+    "types": [
+      "posters"
+    ],
+    "color": "#1b1b22",
+    "slides": [
+      {
+        "type": "posters",
+        "types": [
+          "posters"
+        ],
+        "title": "Внутри волны — постер",
+        "src": "assets/works/posters/inside-the-wave.webp",
+        "ratio": 1.0
+      }
+    ]
+  },
+  {
+    "id": "wooden-lamp",
+    "name": "Деревянный светильник",
+    "status": "Карточка товара",
+    "description": "Карточка деревянного светильника: предметная композиция, преимущества и тёплая атмосфера.",
+    "search": "карточка товара деревянный светильник лампа свет маркетплейс marketplace wooden lamp",
+    "types": [
+      "marketplace"
+    ],
+    "color": "#1b1b22",
+    "slides": [
+      {
+        "type": "marketplace",
+        "types": [
+          "marketplace"
+        ],
+        "title": "Деревянный светильник — карточка товара",
+        "src": "assets/works/marketplace/wooden-lamp.webp",
+        "ratio": 0.75
+      }
+    ]
+  },
+  {
     "id": "rostok",
     "name": "Школа Росток",
     "status": "Для школы",

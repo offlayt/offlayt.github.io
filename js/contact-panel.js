@@ -2,6 +2,7 @@ import { query, queryAll } from './core/dom.js';
 import { createDialog } from './core/dialog.js';
 import { initFloatingContacts } from './contacts/floating.js';
 import { reducedMotion } from './core/media.js';
+import { telephonePlacement } from './contacts/placement.js';
 
 const dialog = query('#contact-dialog');
 if (dialog) {
@@ -16,14 +17,14 @@ if (dialog) {
 
   function placeTelephone() {
     if (!dialog.classList.contains('is-consult') || !lastTrigger) return;
-    const foundation = consult && !consult.hidden ? consult : lastTrigger;
-    const rect = foundation.getBoundingClientRect();
-    const viewport = document.documentElement.clientWidth;
-    const halfProp = query('.contact-furniture', dialog).getBoundingClientRect().width / 2 + 8;
-    const desiredCenter = foundation === consult ? rect.left + rect.width / 2 : viewport / 2;
-    const center = Math.max(halfProp, Math.min(viewport - halfProp, desiredCenter));
-    dialog.style.setProperty('--consult-x', `${center}px`);
-    dialog.style.setProperty('--consult-bottom', `${Math.max(14, window.innerHeight - rect.top)}px`);
+    const consultRect = consult && !consult.hidden ? consult.getBoundingClientRect() : null;
+    const placement = telephonePlacement(
+      consultRect, lastTrigger.getBoundingClientRect(),
+      document.documentElement.clientWidth, window.innerHeight,
+      query('.contact-furniture', dialog).getBoundingClientRect().width,
+    );
+    dialog.style.setProperty('--consult-x', placement.x + 'px');
+    dialog.style.setProperty('--consult-bottom', placement.bottom + 'px');
   }
   const modal = createDialog(dialog, {
     closeDuration: 650,

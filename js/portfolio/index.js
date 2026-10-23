@@ -1,7 +1,7 @@
 import { query, queryAll } from '../core/dom.js';
 import { wrapIndex } from '../core/math.js';
 import { reducedMotion } from '../core/media.js';
-import { projects, workTypes, typeColors } from '../data/projects.js';
+import { projects, workTypes, typeColors } from '../data/projects.js?v=20261023-new-works';
 import { createPortfolioModel } from './model.js';
 import { projectCard, updateCard } from './cards.js';
 import { createPortfolioLayout } from './layout.js';
@@ -13,7 +13,6 @@ export function initPortfolio() {
   if (!grid) return;
   const search = query('#project-search');
   const filterGroup = query('#filters');
-  const count = query('#project-count');
   const empty = query('.empty-state');
   const model = createPortfolioModel(projects);
   const layout = createPortfolioLayout(grid, model);
@@ -39,7 +38,6 @@ export function initPortfolio() {
     grid.innerHTML = visible
       .map((project) => projectCard(project, model.slideIndices(project)))
       .join('');
-    count.textContent = `${visible.length} / ${projects.length}`;
     empty.hidden = visible.length > 0;
     playback.reset();
     filters.forEach((button) =>
