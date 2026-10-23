@@ -1,10 +1,11 @@
 import { scheduleFrame } from '../core/dom.js';
 
-/** Different entry/exit thresholds prevent jitter at the bottom scroll boundary. */
-export function shouldRetractLamp(scrollY, viewportHeight, pageHeight, retracted = false) {
+/** Retract before the room fills the viewport, with more lead time on phones. */
+export function shouldRetractLamp(scrollY, viewportHeight, pageHeight, retracted = false, viewportWidth = 1280) {
   if (pageHeight <= viewportHeight + 1) return false;
   const remaining = Math.max(0, pageHeight - viewportHeight - scrollY);
-  return remaining <= (retracted ? 64 : 12);
+  const lead = viewportWidth <= 760 ? viewportHeight * 0.65 : viewportHeight * 0.22;
+  return remaining <= lead + (retracted ? 64 : 0);
 }
 
 export function initEndRetraction(lamps) {
@@ -14,7 +15,7 @@ export function initEndRetraction(lamps) {
   let retracted = false;
   const update = () => {
     const root = document.scrollingElement || document.documentElement;
-    const next = shouldRetractLamp(window.scrollY, root.clientHeight, root.scrollHeight, retracted);
+    const next = shouldRetractLamp(window.scrollY, root.clientHeight, root.scrollHeight, retracted, root.clientWidth);
     if (next === retracted) return;
     retracted = next;
     rigs.forEach(({ scene, rig }) => {

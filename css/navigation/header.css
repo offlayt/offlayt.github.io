@@ -9,8 +9,9 @@
   align-items: center;
   padding: 0 var(--gutter);
   gap: 30px;
-  background: #101116ed;
-  backdrop-filter: blur(20px);
+  background: #14131cb8;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
   transition: background 0.3s;
 }
