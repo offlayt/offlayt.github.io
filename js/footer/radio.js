@@ -1,5 +1,5 @@
 import { radioTracks } from '../data/radio-tracks.js';
-import { createRadioTitle } from './radio-title.js?v=20261023-spectrum';
+import { createRadioTitle } from './radio-title.js?v=20261023-spectrum-bars';
 
 /** User-powered radio: a finite playlist, valve hiss and gentle fades. */
 export function initRoomRadio(tracks = radioTracks) {
@@ -39,7 +39,7 @@ export function initRoomRadio(tracks = radioTracks) {
     const music = context.createMediaElementSource(audio);
     const analyser = context.createAnalyser();
     analyser.fftSize = 512;
-    analyser.smoothingTimeConstant = 0.6;
+    analyser.smoothingTimeConstant = 0.25;
     analyser.minDecibels = -85;
     analyser.maxDecibels = -5;
     // Measure the filtered music before volume control; exclude the hiss below.
