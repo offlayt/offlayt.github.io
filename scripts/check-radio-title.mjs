@@ -2,16 +2,22 @@ import assert from 'node:assert/strict';
 import { createRadioTitle, spectrumBars } from '../js/footer/radio-title.js';
 
 const spectrum = { bins: new Uint8Array(256), sampleRate: 48000, fftSize: 512 };
-assert.equal(spectrumBars(spectrum), '⠀'.repeat(8), 'Silence produces no bars');
+const baseline = Array(8).fill('▁').join(' ');
+assert.equal(spectrumBars(spectrum), baseline, 'Silence rests on the baseline');
 spectrum.bins[2] = 255;
-const bass = spectrumBars(spectrum);
-assert.notEqual(bass[0], '⠀', 'Low frequencies move the bass column');
-assert.equal(bass.at(-1), '⠀', 'Bass does not move the treble column');
+const bass = spectrumBars(spectrum).split(' ');
+assert.notEqual(bass[0], '▁', 'Low frequencies move the bass column');
+assert.equal(bass.at(-1), '▁', 'Bass does not move the treble column');
 spectrum.bins.fill(0);
 spectrum.bins.fill(255, 34, 46);
-const treble = spectrumBars(spectrum);
-assert.equal(treble[0], '⠀');
-assert.equal(treble.at(-1), '⡇', 'High frequencies move the treble column');
+const treble = spectrumBars(spectrum).split(' ');
+assert.equal(treble[0], '▁');
+assert.equal(treble.at(-1), '█', 'High frequencies move the treble column');
+const heights = [0, 50, 70, 90, 115, 140, 165, 198].map(energy => {
+  spectrum.bins.fill(energy);
+  return spectrumBars(spectrum).split(' ')[0];
+});
+assert.equal(new Set(heights).size, 8, 'Normal signal levels cover all eight bar heights');
 spectrum.bins.fill(80);
 
 const originalInterval = globalThis.setInterval;
@@ -36,7 +42,8 @@ const playing = () => {
   audio.paused = false;
   audio.ended = false;
   fire('playing');
-  assert.match(document.title, /^[⠀⡀⡄⡆⡇]+ · Портфолио$/u);
+  assert.match(document.title, /^[▁▂▃▄▅▆▇█ ]+$/u);
+  assert.equal(document.title.includes('Портфолио'), false, 'Music replaces the title completely');
   assert.equal(intervals.size, 1);
 };
 try {
@@ -53,7 +60,7 @@ try {
   assert.notEqual(document.title, first, 'Column heights follow the audio energy');
   spectrum.bins.fill(0);
   tick();
-  assert.equal(document.title, 'Портфолио', 'A silent passage has no dancing bars');
+  assert.equal(document.title, baseline, 'A silent passage holds still without restoring the label');
   spectrum.bins.fill(80);
   fire('playing');
   assert.equal(intervals.size, 1, 'Repeated playing events never duplicate timers');
