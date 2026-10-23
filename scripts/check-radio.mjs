@@ -33,6 +33,7 @@ class Context {
   createDynamicsCompressor = node;
   createMediaElementSource = node;
   createBufferSource = node;
+  createAnalyser() { return { ...node(), frequencyBinCount: 256, getByteFrequencyData: bins => bins.fill(0) }; }
   createBuffer() { return { getChannelData: () => new Float32Array(16) }; }
   resume() { return Promise.resolve(); }
   suspend() { this.suspended = true; return Promise.resolve(); }
