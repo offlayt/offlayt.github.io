@@ -1,0 +1,13 @@
+# Превью ссылки
+
+Обложка [portfolio-room-preview.jpg](../assets/portfolio-room-preview.jpg) создана встроенным image_gen. Для сайта выполнены только подгонка до 1200 × 630 и конвертация в JPEG quality 92. Новый URL заменяет прежнее изображение в Open Graph и Twitter на всех 13 страницах. Формат карточки — summary_large_image; размеры и alt заданы явно. Старое название удалено из заголовков, описаний и структурированных данных превью; заголовки кейсов сохраняют названия проектов.
+
+## Промпт
+
+Use case: ads-marketing.
+Asset type: finished Open Graph social link preview for a creative website and design portfolio, landscape 1200:630 aspect ratio, full bleed.
+Reference image 1 is the website's vintage wooden CRT television; use its material, proportions and dual brass dials as visual reference. Reference image 2 is the user's camera-with-flash mark; preserve the silhouette accurately as a small cream graphic in the layout. Reference image 3 is the site's dark damask wallpaper.
+Primary request: create a sophisticated, surprising editorial cover matching a dark vintage interactive portfolio, without any studio name. A cinematic miniature room: almost-black charcoal damask wall, dark walnut floor, a deep burgundy Persian rug, the chunky polished wooden television on the right, small folded cream paper boat resting on its top right. The television screen glows muted teal and shows a tasteful abstract geometric collage suggesting digital design, not cartoons. Small old radio at far right behind the television is optional only if not crowded. On the left, clean large typographic composition that is immediately readable as a social thumbnail, integrated into the room like a bold editorial title. Small camera mark above the title. Warm brass and cream accents, rich wood, subtle cyan edge light, realistic contact shadows, restrained CRT scanlines and film grain, tactile premium 3D and photographed set feeling.
+Text (verbatim, Cyrillic): "ПОРТФОЛИО" as the main large cream headline, and "САЙТЫ / ДИЗАЙН" as a smaller brass line below. No other text. Main headline may be split as "ПОРТ" on line one and "ФОЛИО" on line two for a confident large block.
+Composition: balanced wide 1.905:1 rectangle, title fills left 48%, television right 48%; generous but not empty breathing room, keep all text, camera and main TV within a centered 90% safe area, strong readability at 400px wide. Floor occupies lower quarter, wall/floor transition visible. Creative editorial art direction; no website UI or buttons, no browser frames.
+Constraints: no lightbulb, no word СВЕТ, no studio name, no watermark, no tiny illegible text, no extra branding. Final image should feel like a crafted invitation into the site's retro room.
