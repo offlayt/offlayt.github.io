@@ -1,5 +1,5 @@
 /* Portfolio entry point. Each component owns its responsive rules. */
-@import url('./portfolio/toolbar.css');
+@import url('./portfolio/toolbar.css?v=20261023-search');
 @import url('./portfolio/cards.css');
 @import url('./portfolio/media.css');
 @import url('./portfolio/viewer.css');

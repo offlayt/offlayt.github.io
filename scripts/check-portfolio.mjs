@@ -8,7 +8,13 @@ import { mediaMarkup } from '../js/portfolio/media.js';
 const root = new URL('../', import.meta.url);
 const model = createPortfolioModel(projects);
 assert.equal(new Set(projects.map(p => p.id)).size, projects.length, 'Unique project IDs');
-assert.equal(projects.length, 34, 'The removed student campaign stays out of the catalog');
+assert.equal(projects.length, 39, 'Includes the five supplied projects, with one two-image cafe gallery');
+const supplied = ['glamorous-tulip', 'vlk-atelier', 'arka-cafe', 'inside-the-wave', 'wooden-lamp'];
+for (const id of supplied) assert.ok(projects.some(project => project.id === id), id + ': supplied work is present');
+assert.equal(projects.find(project => project.id === 'arka-cafe').slides.length, 2, 'Cafe logo and applications share one gallery');
+model.setQuery('Арка');
+assert.deepEqual(model.visibleProjects().map(project => project.id), ['arka-cafe'], 'Cafe is searchable as one project');
+model.setQuery('');
 for (const project of projects) {
   assert.ok(project.slides.length, `${project.id}: gallery is nonempty`);
   const allowed = project.types.some(type => ['site', 'brand', 'brandbooks'].includes(type));

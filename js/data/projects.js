@@ -1,4 +1,4 @@
-import { projectCatalog } from './project-catalog.js';
+import { projectCatalog } from './project-catalog.js?v=20261023-new-works';
 
 export const workTypes = {
   all: 'Все работы',

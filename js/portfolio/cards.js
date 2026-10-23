@@ -1,6 +1,6 @@
 import { query, queryAll, escapeHtml } from '../core/dom.js';
 import { reducedMotion } from '../core/media.js';
-import { workTypes, typeColors, hasDetailedCase } from '../data/projects.js';
+import { workTypes, typeColors, hasDetailedCase } from '../data/projects.js?v=20261023-new-works';
 import { mediaMarkup, pauseMedia } from './media.js';
 
 const nodes = new WeakMap();
