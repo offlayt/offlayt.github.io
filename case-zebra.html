@@ -4,6 +4,106 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101116">
+    <!-- page-loader:head:start -->
+    <style id="page-loader-style">/* Inlined by scripts/sync-page-loader.mjs for first paint. */
+.page-loader { display: none; }
+html.is-loading { overflow: hidden; background: #0b0c10; }
+html.is-loading body > :not(.page-loader) { visibility: hidden; }
+html.is-loading .page-loader, html.is-revealing .page-loader {
+  position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
+  overflow: hidden; background: #0b0c10; isolation: isolate;
+  opacity: 1; transition: opacity 420ms ease 80ms;
+}
+.page-loader__scene {
+  --logo-cycle: 4000ms;
+  position: relative; width: min(280px, 68vw, 32vh); aspect-ratio: 1; isolation: isolate;
+  transform: translateY(-16px);
+}
+.page-loader__form { position: absolute; inset: 0; isolation: isolate; }
+.page-loader__copy {
+  position: absolute; inset: 3.5%; display: block; width: 93%; height: 93%;
+  object-fit: contain; pointer-events: none;
+}
+.page-loader__copy--main { z-index: 1; }
+.page-loader__stack { position: absolute; inset: 0; z-index: 2; isolation: isolate; }
+.page-loader__copy--one { --copy-start: 0%; --copy-drop: 13%; --copy-motion: loader-copy-one; z-index: 2; filter: brightness(.92); }
+.page-loader__copy--two { --copy-start: 13%; --copy-drop: 26%; --copy-motion: loader-copy-two; z-index: 3; filter: brightness(.82); }
+.page-loader__copy--three { --copy-start: 26%; --copy-drop: 39%; --copy-motion: loader-copy-three; z-index: 4; filter: brightness(.73); }
+.page-loader__copy--four { --copy-start: 39%; --copy-drop: 52%; --copy-motion: loader-copy-four; z-index: 5; filter: brightness(.64); }
+.page-loader__copy--five { --copy-start: 52%; --copy-drop: 65%; --copy-motion: loader-copy-five; z-index: 6; filter: brightness(.56); }
+.page-loader__copy--six { --copy-start: 65%; --copy-drop: 78%; --copy-motion: loader-copy-six; z-index: 7; filter: brightness(.48); }
+.page-loader__copy:not(.page-loader__copy--main) { opacity: 0; }
+.is-logo-ready .page-loader__copy:not(.page-loader__copy--main) {
+  animation: var(--copy-motion) var(--logo-cycle) cubic-bezier(.32,0,.5,1) infinite;
+}
+.is-logo-ready .page-loader__copy--main {
+  animation: loader-original-approach var(--logo-cycle) cubic-bezier(.4,0,.2,1) infinite;
+}
+html.is-revealing .page-loader { opacity: 0; pointer-events: none; }
+html.is-revealing .page-loader * { animation-play-state: paused; }
+@keyframes loader-original-approach {
+  0%,48%,100% { transform: scale(1); }
+  4%,44% { transform: scale(1.04); }
+}
+@keyframes loader-copy-one {
+  0%,4%,44%,100% { transform: translateY(var(--copy-start)) scale(1.04); opacity: 0; }
+  5% { opacity: .98; }
+  6%,42% { transform: translateY(var(--copy-drop)) scale(1.04); opacity: .98; }
+}
+@keyframes loader-copy-two {
+  0%,6%,42%,100% { transform: translateY(var(--copy-start)) scale(1.04); opacity: 0; }
+  7% { opacity: .98; }
+  8%,40% { transform: translateY(var(--copy-drop)) scale(1.04); opacity: .98; }
+}
+@keyframes loader-copy-three {
+  0%,8%,40%,100% { transform: translateY(var(--copy-start)) scale(1.04); opacity: 0; }
+  9% { opacity: .98; }
+  10%,38% { transform: translateY(var(--copy-drop)) scale(1.04); opacity: .98; }
+}
+@keyframes loader-copy-four {
+  0%,10%,38%,100% { transform: translateY(var(--copy-start)) scale(1.04); opacity: 0; }
+  11% { opacity: .98; }
+  12%,36% { transform: translateY(var(--copy-drop)) scale(1.04); opacity: .98; }
+}
+@keyframes loader-copy-five {
+  0%,12%,36%,100% { transform: translateY(var(--copy-start)) scale(1.04); opacity: 0; }
+  13% { opacity: .98; }
+  14%,34% { transform: translateY(var(--copy-drop)) scale(1.04); opacity: .98; }
+}
+@keyframes loader-copy-six {
+  0%,14%,34%,100% { transform: translateY(var(--copy-start)) scale(1.04); opacity: 0; }
+  15% { opacity: .98; }
+  16%,32% { transform: translateY(var(--copy-drop)) scale(1.04); opacity: .98; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-loader, .page-loader * { animation: none !important; transition: none !important; }
+}
+</style>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const state = window.__pageLoader = { started: performance.now(), appReady: true, finished: false };
+        root.classList.add('is-loading');
+        state.reveal = (immediate = false) => {
+          if (state.finished) return;
+          state.finished = true;
+          clearTimeout(state.timeout);
+          state.unlock?.();
+          document.body?.removeAttribute('aria-busy');
+          root.classList.remove('is-loading');
+          root.classList.add('is-revealing');
+          window.dispatchEvent(new Event('portfolio:revealed'));
+          setTimeout(() => {
+            root.classList.remove('is-revealing');
+            document.querySelector('.page-loader')?.remove();
+          }, immediate || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 540);
+        };
+        state.timeout = setTimeout(() => state.reveal(), 6000);
+      })();
+    </script>
+    <link rel="preload" as="image" href="assets/studio-camera-logo.png" fetchpriority="high">
+    <script defer src="js/page-loader.js?v=20261026-logo-fold-loop"></script>
+    <!-- page-loader:head:end -->
   <meta name="description" content="Брендбук для дизайнерской организации ZEBRA: логотип, фирменные цвета, шрифты и варианты знака.">
   <title>ZEBRA — Портфолио</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +134,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=20261023-camera-large">
 </head>
 <body>
+    <!-- page-loader:body:start --><div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы"><div class="page-loader__scene" aria-hidden="true"><div class="page-loader__form page-loader__form--logo"><img class="page-loader__copy page-loader__copy--main" data-camera-logo src="assets/studio-camera-logo.png" alt="" width="521" height="462" fetchpriority="high" /><div class="page-loader__stack"><img class="page-loader__copy page-loader__copy--one"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--two"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--three"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--four"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--five"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--six"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /></div></div></div></div><!-- page-loader:body:end -->
   <main class="case-screen">
     <aside class="case-sidebar" aria-label="О проекте">
       <a class="case-back" href="index.html#portfolio"><span class="case-back__arrow" aria-hidden="true">←</span>Все работы</a>

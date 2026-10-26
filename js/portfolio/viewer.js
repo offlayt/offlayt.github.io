@@ -2,7 +2,7 @@ import { query, queryAll } from '../core/dom.js';
 import { wrapIndex } from '../core/math.js';
 import { createDialog } from '../core/dialog.js';
 import { mediaMarkup, pauseMedia, keepSilent } from './media.js';
-import { hasDetailedCase } from '../data/projects.js?v=20261023-new-works';
+import { hasDetailedCase } from '../data/projects.js?v=20261026-without-violetta';
 import { reducedMotion } from '../core/media.js';
 import { createImageZoom } from './zoom.js';
 import { initViewerDismiss } from './viewer-dismiss.js';

@@ -1,4 +1,4 @@
-import { projectCatalog } from './project-catalog.js?v=20261023-new-works';
+import { projectCatalog } from './project-catalog.js?v=20261026-without-violetta';
 
 export const workTypes = {
   all: 'Все работы',

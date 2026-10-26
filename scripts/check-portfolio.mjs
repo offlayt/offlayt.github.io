@@ -8,7 +8,7 @@ import { mediaMarkup } from '../js/portfolio/media.js';
 const root = new URL('../', import.meta.url);
 const model = createPortfolioModel(projects);
 assert.equal(new Set(projects.map(p => p.id)).size, projects.length, 'Unique project IDs');
-assert.equal(projects.length, 39, 'Includes the five supplied projects, with one two-image cafe gallery');
+assert.equal(projects.length, 38, 'Includes supplied projects and excludes the removed logo case');
 const supplied = ['glamorous-tulip', 'vlk-atelier', 'arka-cafe', 'inside-the-wave', 'wooden-lamp'];
 for (const id of supplied) assert.ok(projects.some(project => project.id === id), id + ': supplied work is present');
 assert.equal(projects.find(project => project.id === 'arka-cafe').slides.length, 2, 'Cafe logo and applications share one gallery');
