@@ -8,15 +8,19 @@ const bootstrap = html.match(/<script>\s*([\s\S]*?)<\/script>/)[1];
 const script = await readFile(new URL('js/page-loader.js', root), 'utf8');
 const flush = async () => { for (let i = 0; i < 20; i++) await Promise.resolve(); };
 
-function harness({ reduced = false, pendingFonts = false, brokenImage = false, pendingCamera = false } = {}) {
+function harness({ reduced = false, pendingFonts = false, brokenImage = false, pendingCamera = false, pendingViews = false } = {}) {
   let now = 0, sequence = 0, removed = false;
   const timers = new Map(), classes = new Set(), attrs = new Map();
   const events = new EventTarget();
   const content = { inert: false }, alreadyInert = { inert: true };
-  const camera = { loading: 'eager', decode: () => pendingCamera ? new Promise(() => {}) : Promise.resolve() };
+  const camera = { loading: 'eager', naturalWidth: 480, decode: () => pendingCamera ? new Promise(() => {}) : Promise.resolve() };
+  const additional = () => ({ naturalWidth: 480, decode: () => pendingViews ? new Promise(() => {}) : Promise.resolve() });
+  const views = [additional(), additional()], closed = additional();
   const cover = {
     contains: () => false,
-    querySelectorAll: () => [camera],
+    querySelector: selector => selector === '[data-camera-front]' ? camera : closed,
+    querySelectorAll: () => views,
+    classList: { add() {} },
     remove: () => { removed = true; },
   };
   let offscreenDecoded = false;
@@ -90,6 +94,10 @@ const failed = harness({ brokenImage: true, reduced: true });
 failed.ready();
 await failed.advance(0);
 assert.equal(failed.removed, true, 'Broken images settle; reduced motion skips the artificial minimum');
+const slowViews = harness({ pendingViews: true });
+slowViews.ready();
+await slowViews.advance(340);
+assert.equal(slowViews.window.__pageLoader.finished, true, 'Secondary camera states never delay the page');
 const restored = harness();
 const pageshow = new Event('pageshow');
 Object.defineProperty(pageshow, 'persisted', { value: true });

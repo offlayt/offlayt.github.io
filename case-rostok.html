@@ -12,86 +12,62 @@ html.is-loading body > :not(.page-loader) { visibility: hidden; }
 html.is-loading .page-loader, html.is-revealing .page-loader {
   position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
   overflow: hidden; background: #0b0c10; isolation: isolate;
-  opacity: 1; transition: opacity 400ms ease 80ms;
+  opacity: 1; transition: opacity 300ms ease 220ms;
 }
 .page-loader__scene {
-  position: relative; width: min(300px, 72vw); aspect-ratio: 1;
-  perspective: 850px; isolation: isolate;
+  --camera-cycle: 1800ms;
+  position: relative; width: min(300px, 72vw); aspect-ratio: 1; isolation: isolate;
 }
 .page-loader__scene::before {
   content: ''; position: absolute; inset: -28%; z-index: -1;
-  background: radial-gradient(ellipse, #bd884518 0%, #bd884506 40%, transparent 68%);
+  background: radial-gradient(ellipse, #bd884514, transparent 65%);
 }
 .page-loader__scene::after {
   content: ''; position: absolute; inset: auto 13% -4%; height: 10%; z-index: -1;
-  background: radial-gradient(ellipse, #0009, transparent 68%);
-  animation: loader-shadow 1600ms ease-in-out infinite;
+  background: radial-gradient(ellipse, #0008, transparent 68%);
 }
 .page-loader__camera {
-  position: absolute; inset: 0; transform-style: preserve-3d;
-  animation: loader-orbit 1600ms cubic-bezier(.45,0,.25,1) infinite;
+  position: absolute; inset: 0; isolation: isolate;
+  transition: transform 500ms ease;
 }
-.page-loader__layer {
+.page-loader__open {
+  position: absolute; inset: 0; isolation: isolate;
+  transition: opacity 220ms ease;
+}
+.page-loader__pose {
   position: absolute; inset: 0; display: block; width: 100%; height: 100%;
-  object-fit: contain; transform-origin: 50% 50%; backface-visibility: hidden;
-  animation: loader-layer 1600ms cubic-bezier(.45,0,.25,1) infinite;
+  object-fit: contain; opacity: 0;
 }
-.page-loader__layer--top {
-  --split-x: -15px; --split-z: 15px; --split-turn: -4deg;
-  clip-path: inset(0 0 67%); transform-origin: 50% 33%;
+.page-loader__pose--front { opacity: 1; }
+.page-loader__pose--left { transform: translateX(-16.5%); }
+.page-loader__pose--right { transform: translateX(10.5%); }
+@supports (mix-blend-mode: plus-lighter) {
+  .page-loader__pose { mix-blend-mode: plus-lighter; }
 }
-.page-loader__layer--middle {
-  --split-x: 9px; --split-z: 36px; --split-turn: 2deg;
-  clip-path: inset(33% 0 34%);
-}
-.page-loader__layer--bottom {
-  --split-x: -7px; --split-z: -12px; --split-turn: -2deg;
-  clip-path: inset(66% 0 0); transform-origin: 50% 66%;
-}
-.page-loader__echo {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
-  pointer-events: none; opacity: 0;
-  animation: loader-echo 1600ms ease-in-out infinite;
-}
-.page-loader__sweep {
-  position: absolute; inset: 0; pointer-events: none; opacity: 0;
-  background: linear-gradient(110deg, transparent 30%, #e2c18b24 49%, transparent 68%);
-  mask: url('assets/loading/antique-camera.webp') center / contain no-repeat;
-  animation: loader-sweep 1600ms ease-in-out infinite;
-}
+.has-camera-views .page-loader__open { animation: loader-float var(--camera-cycle) ease-in-out infinite; }
+.has-camera-views .page-loader__pose--front { animation: loader-view-front var(--camera-cycle) ease-in-out infinite; }
+.has-camera-views .page-loader__pose--left { animation: loader-view-left var(--camera-cycle) ease-in-out infinite; }
+.has-camera-views .page-loader__pose--right { animation: loader-view-right var(--camera-cycle) ease-in-out infinite; }
+.page-loader__pose--closed { transition: opacity 220ms ease; }
 html.is-revealing .page-loader { opacity: 0; pointer-events: none; }
-html.is-revealing .page-loader__camera { animation: loader-depart 400ms ease-out both; }
-html.is-revealing .page-loader__layer { animation: none; transform: none; }
-html.is-revealing .page-loader__echo, html.is-revealing .page-loader__sweep { animation: none; opacity: 0; }
-@keyframes loader-orbit {
-  0%,100% { transform: rotateY(-17deg) rotateZ(-2deg) translateY(0); }
-  24% { transform: rotateY(23deg) rotateZ(2deg) translateY(-7px); }
-  52% { transform: rotateY(6deg) rotateZ(0) translateY(-3px); }
-  76% { transform: rotateY(-22deg) rotateZ(-2deg) translateY(-5px); }
+html.is-revealing .page-loader__camera { transform: translateY(6px) scale(.95); }
+html.is-revealing .has-camera-closed .page-loader__open { opacity: 0; }
+html.is-revealing .has-camera-closed .page-loader__pose--closed { opacity: 1; }
+@keyframes loader-view-front {
+  0%,6%,38%,50%,82%,100% { opacity: 1; }
+  14%,30%,58%,74% { opacity: 0; }
 }
-@keyframes loader-layer {
-  0%,52%,100% { transform: translate3d(0,0,0) rotateZ(0); }
-  24% { transform: translate3d(var(--split-x),-2px,var(--split-z)) rotateZ(var(--split-turn)); }
-  76% { transform: translate3d(calc(var(--split-x) * -.45),0,8px) rotateZ(0); }
+@keyframes loader-view-left {
+  0%,6%,38%,50%,58%,74%,82%,100% { opacity: 0; }
+  14%,30% { opacity: 1; }
 }
-@keyframes loader-echo {
-  0%,8%,52%,100% { opacity: 0; transform: translate3d(0,0,-24px) rotateZ(0); }
-  24% { opacity: .14; transform: translate3d(-19px,4px,-24px) rotateZ(-7deg); }
-  76% { opacity: .08; transform: translate3d(12px,2px,-24px) rotateZ(4deg); }
+@keyframes loader-view-right {
+  0%,6%,14%,30%,38%,50%,82%,100% { opacity: 0; }
+  58%,74% { opacity: 1; }
 }
-@keyframes loader-sweep {
-  0%,6%,55%,100% { opacity: 0; transform: translateX(-12%); }
-  24% { opacity: .9; transform: translateX(6%); }
-  42% { opacity: 0; transform: translateX(18%); }
-}
-@keyframes loader-shadow {
-  0%,100% { transform: scaleX(.86); opacity: .65; }
-  24%,76% { transform: scaleX(.7); opacity: .35; }
-  52% { transform: scaleX(.92); opacity: .6; }
-}
-@keyframes loader-depart {
-  from { transform: rotateY(0) scale(1); }
-  to { transform: rotateY(-12deg) scale(.92) translateY(-8px); }
+@keyframes loader-float {
+  0%,6%,38%,50%,82%,100% { transform: translateY(0); }
+  14%,30%,58%,74% { transform: translateY(-3px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .page-loader, .page-loader *, .page-loader::after { animation: none !important; transition: none !important; }
@@ -120,7 +96,7 @@ html.is-revealing .page-loader__echo, html.is-revealing .page-loader__sweep { an
       })();
     </script>
     <link rel="preload" as="image" href="assets/loading/antique-camera.webp" fetchpriority="high">
-    <script defer src="js/page-loader.js?v=20261026-camera-orbit"></script>
+    <script defer src="js/page-loader.js?v=20261026-camera-states"></script>
     <!-- page-loader:head:end -->
   <meta name="description" content="Кейс школы Росток: публичный сайт, панель сотрудников, маскот и рекламные материалы.">
   <title>Школа Росток — Портфолио</title>
@@ -156,11 +132,12 @@ html.is-revealing .page-loader__echo, html.is-revealing .page-loader__sweep { an
     <div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы">
       <div class="page-loader__scene" aria-hidden="true">
         <div class="page-loader__camera">
-          <img class="page-loader__echo" src="assets/loading/antique-camera.webp" alt="" width="480" height="480" />
-          <img class="page-loader__layer page-loader__layer--top" src="assets/loading/antique-camera.webp" alt="" width="480" height="480" fetchpriority="high" />
-          <img class="page-loader__layer page-loader__layer--middle" src="assets/loading/antique-camera.webp" alt="" width="480" height="480" />
-          <img class="page-loader__layer page-loader__layer--bottom" src="assets/loading/antique-camera.webp" alt="" width="480" height="480" />
-          <span class="page-loader__sweep"></span>
+          <div class="page-loader__open">
+            <img class="page-loader__pose page-loader__pose--front" data-camera-front src="assets/loading/antique-camera.webp" alt="" width="480" height="480" fetchpriority="high" />
+            <img class="page-loader__pose page-loader__pose--left" data-camera-view src="assets/loading/antique-camera-left.webp" alt="" width="480" height="480" fetchpriority="low" decoding="async" />
+            <img class="page-loader__pose page-loader__pose--right" data-camera-view src="assets/loading/antique-camera-right.webp" alt="" width="480" height="480" fetchpriority="low" decoding="async" />
+          </div>
+          <img class="page-loader__pose page-loader__pose--closed" data-camera-closed src="assets/loading/antique-camera-closed.webp" alt="" width="480" height="480" fetchpriority="low" decoding="async" />
         </div>
       </div>
     </div>
