@@ -27,10 +27,10 @@ const boot = appReady => `<!-- page-loader:head:start -->
       })();
     </script>
     <link rel="preload" as="image" href="assets/studio-camera-logo.png" fetchpriority="high">
-    <script defer src="js/page-loader.js?v=20261026-logo-cascade"></script>
+    <script defer src="js/page-loader.js?v=20261026-cascade-burst"></script>
     <!-- page-loader:head:end -->`;
 function form(kind, source, width, height) {
-  const copies = ['three', 'two', 'one', 'main'].map(copy => {
+  const copies = ['one', 'two', 'three', 'four', 'five', 'six', 'main'].map(copy => {
     const marker = copy === 'main' ? (kind === 'camera' ? 'data-camera-front' : 'data-camera-logo') : '';
     return '<img class="page-loader__copy page-loader__copy--' + copy + '" ' + marker
       + ' src="' + source + '" alt="" width="' + width + '" height="' + height + '"'

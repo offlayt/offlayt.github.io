@@ -18,6 +18,7 @@ function frames(name, property) {
 const poses = ['camera', 'logo'].map(name => frames('loader-' + name + '-form', 'opacity'));
 frames('loader-copy-fall', 'transform');
 frames('loader-copy-opacity', 'opacity');
+frames('loader-original-settle', 'transform');
 const flash = frames('loader-soft-flash', 'opacity');
 assert.ok(Math.max(...flash.map(([, value]) => Number(value))) <= .16, 'The flash remains subdued');
 function opacity(keyframes, phase) {
@@ -36,10 +37,31 @@ for (const filename of ['assets/loading/antique-camera.webp', 'assets/studio-cam
   assert.ok((await stat(new URL(filename, root))).size < 100_000, filename + ': lightweight asset');
 }
 const generator = await readFile(new URL('scripts/sync-page-loader.mjs', root), 'utf8');
-assert.match(generator, /\['three', 'two', 'one', 'main'\]/, 'Each image has three fading copies');
+const copies = [...css.matchAll(/\.page-loader__copy--(one|two|three|four|five|six)\s*\{([^}]+)\}/g)].map(([, name, rules]) => ({
+  name,
+  lag: Number(rules.match(/--copy-lag:\s*(\d+)ms/)[1]),
+  layer: Number(rules.match(/z-index:\s*(\d+)/)[1]),
+  brightness: Number(rules.match(/brightness\(([^)]+)\)/)[1]),
+}));
+assert.equal(copies.length, 6, 'Six complete descending copies per image');
+assert.match(generator, /\['one', 'two', 'three', 'four', 'five', 'six', 'main'\]/);
 assert.ok(!generator.includes('data-camera-view'), 'Only the static front and logo are requested');
-assert.ok(css.includes('--copy-drop: 92%'), 'Copies travel almost a full image height');
-assert.ok(css.includes('--copy-lag: 180ms'), 'Copies descend in sequence');
-assert.ok(css.includes('loader-copy-fall var(--camera-cycle) linear'), 'The descent has constant velocity');
+const duration = Number(css.match(/--camera-cycle:\s*(\d+)ms/)[1]);
+assert.equal(duration, 2400, 'Faster 2.4 second loop');
+assert.ok(css.includes('--form-offset: -1200ms'), 'Camera copies share the half-cycle offset');
+const fadeEnd = frames('loader-copy-opacity', 'opacity').find(([phase, value]) => phase > 27 && Number(value) === 0)[0];
+for (let i = 0; i < copies.length; i++) {
+  const current = copies[i], previous = copies[i-1];
+  assert.ok(fadeEnd / 100 * duration + current.lag < .46 * duration,
+    current.name + ': finishes before the outgoing form starts to crossfade');
+  assert.ok(current.layer > 1, 'Whole copies render above the original');
+  if (previous) {
+    assert.ok(current.lag > previous.lag, 'New copies leave later along the same path');
+    assert.ok(current.layer > previous.layer, 'New copies overlap older, lower copies');
+    assert.ok(current.brightness > previous.brightness, 'Older copies darken toward the bottom');
+  }
+}
+assert.ok(!css.includes('--copy-drop'), 'One shared trajectory prevents late copies overtaking early copies');
+assert.ok(css.includes('translateY(110%) scale(.92)'), 'The cascade tapers as it falls');
 assert.ok(!css.includes('loader-darken'), 'The main picture remains stable while copies move');
-console.log('Validated logo-first cycle, 401 phases, foreground copy cascade, continuous descent and subdued flashes.');
+console.log('Validated 401 phases, six ordered copies, shared descent, layer/brightness order, clear transitions and 2.4 second seam.');
