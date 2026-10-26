@@ -12,33 +12,34 @@ html.is-loading body > :not(.page-loader) { visibility: hidden; }
 html.is-loading .page-loader, html.is-revealing .page-loader {
   position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
   overflow: hidden; background: #0b0c10; isolation: isolate;
-  opacity: 1; transition: opacity 360ms ease 100ms;
+  opacity: 1; transition: opacity 420ms ease 80ms;
 }
 .page-loader__scene {
-  --camera-cycle: 2800ms;
-  position: relative; width: min(300px, 72vw); aspect-ratio: 1; isolation: isolate;
+  --camera-cycle: 3600ms;
+  position: relative; width: min(300px, 72vw, 44vh); aspect-ratio: 1; isolation: isolate;
   transform: translateY(-16px);
 }
-.page-loader__form { position: absolute; inset: 0; isolation: isolate; }
-.page-loader__form--camera { opacity: 1; }
-.page-loader__form--logo { opacity: 0; }
+.page-loader__form { position: absolute; inset: 0; isolation: isolate; --form-offset: 0ms; }
+.page-loader__form--camera { opacity: 0; --form-offset: -1800ms; }
+.page-loader__form--logo { opacity: 1; }
 .page-loader__copy {
   position: absolute; inset: 0; display: block; width: 100%; height: 100%;
   object-fit: contain; pointer-events: none;
 }
 .page-loader__form--logo .page-loader__copy { width: 93%; height: 93%; inset: 3.5%; }
-.page-loader__copy--main { z-index: 4; }
-.page-loader__copy--one { --trail-y: 18px; --trail-opacity: .24; z-index: 3; opacity: 0; }
-.page-loader__copy--two { --trail-y: 36px; --trail-opacity: .15; z-index: 2; opacity: 0; }
-.page-loader__copy--three { --trail-y: 54px; --trail-opacity: .08; z-index: 1; opacity: 0; }
-.page-loader__form--camera .page-loader__copy--one { --trail-y: 24px; --trail-opacity: .36; }
-.page-loader__form--camera .page-loader__copy--two { --trail-y: 48px; --trail-opacity: .24; }
-.page-loader__form--camera .page-loader__copy--three { --trail-y: 72px; --trail-opacity: .14; }
-.is-camera-ready .page-loader__copy--main { animation: loader-darken var(--camera-cycle) ease-in-out infinite; }
-.is-camera-ready .page-loader__copy:not(.page-loader__copy--main) { animation: loader-trail var(--camera-cycle) ease-in-out infinite; }
-.is-camera-ready .page-loader__form--logo .page-loader__copy { animation-delay: -1400ms; }
+.page-loader__copy--main { z-index: 1; }
+.page-loader__copy--one { --copy-drop: 36%; --copy-lag: 0ms; z-index: 2; opacity: 0; filter: brightness(.88); }
+.page-loader__copy--two { --copy-drop: 64%; --copy-lag: 90ms; z-index: 3; opacity: 0; filter: brightness(.72); }
+.page-loader__copy--three { --copy-drop: 92%; --copy-lag: 180ms; z-index: 4; opacity: 0; filter: brightness(.58); }
+.is-camera-ready .page-loader__copy:not(.page-loader__copy--main) {
+  animation: loader-copy-fall var(--camera-cycle) linear infinite,
+    loader-copy-opacity var(--camera-cycle) cubic-bezier(.4,0,.2,1) infinite;
+  animation-delay: calc(var(--form-offset) + var(--copy-lag));
+}
 .can-switch .page-loader__form--camera { animation: loader-camera-form var(--camera-cycle) ease-in-out infinite; }
 .can-switch .page-loader__form--logo { animation: loader-logo-form var(--camera-cycle) ease-in-out infinite; }
+.camera-only .page-loader__form--camera { opacity: 1; --form-offset: 0ms; }
+.camera-only .page-loader__form--logo { opacity: 0; }
 .page-loader__flash {
   position: absolute; inset: -25%; z-index: 5; pointer-events: none; opacity: 0;
   background: radial-gradient(ellipse, #f3eee4b0 0%, #e4dbce38 24%, transparent 65%);
@@ -47,23 +48,22 @@ html.is-loading .page-loader, html.is-revealing .page-loader {
 html.is-revealing .page-loader { opacity: 0; pointer-events: none; }
 html.is-revealing .page-loader * { animation-play-state: paused; }
 @keyframes loader-camera-form {
-  0%,46%,100% { opacity: 1; }
-  50%,96% { opacity: 0; }
-}
-@keyframes loader-logo-form {
   0%,46%,100% { opacity: 0; }
   50%,96% { opacity: 1; }
 }
-@keyframes loader-trail {
-  0%,3%,50%,100% { opacity: 0; transform: translateY(0); }
-  18% { opacity: var(--trail-opacity); transform: translateY(var(--trail-y)); }
-  38% { opacity: var(--trail-opacity); transform: translateY(calc(var(--trail-y) * 1.2)); }
-  46% { opacity: 0; transform: translateY(calc(var(--trail-y) * 1.5)); }
+@keyframes loader-logo-form {
+  0%,46%,100% { opacity: 1; }
+  50%,96% { opacity: 0; }
 }
-@keyframes loader-darken {
-  0%,5%,50%,100% { opacity: 1; }
-  18%,38% { opacity: .72; }
-  46% { opacity: .88; }
+@keyframes loader-copy-fall {
+  0%,2%,50%,100% { transform: translateY(0); }
+  48% { transform: translateY(var(--copy-drop)); }
+}
+@keyframes loader-copy-opacity {
+  0%,2%,48%,50%,100% { opacity: 0; }
+  10% { opacity: .98; }
+  30% { opacity: .92; }
+  40% { opacity: .82; }
 }
 @keyframes loader-soft-flash {
   0%,44%,52%,94%,100% { opacity: 0; transform: scale(.85); }
@@ -90,13 +90,13 @@ html.is-revealing .page-loader * { animation-play-state: paused; }
           setTimeout(() => {
             root.classList.remove('is-revealing');
             document.querySelector('.page-loader')?.remove();
-          }, immediate || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500);
+          }, immediate || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 540);
         };
         state.timeout = setTimeout(() => state.reveal(), 6000);
       })();
     </script>
-    <link rel="preload" as="image" href="assets/loading/antique-camera.webp" fetchpriority="high">
-    <script defer src="js/page-loader.js?v=20261026-camera-trail"></script>
+    <link rel="preload" as="image" href="assets/studio-camera-logo.png" fetchpriority="high">
+    <script defer src="js/page-loader.js?v=20261026-logo-cascade"></script>
     <!-- page-loader:head:end -->
   <meta name="description" content="Кейс Клиники Здоровья: сайт медицинской клиники, панель управления и фирменный знак.">
   <title>Клиника Здоровья — Портфолио</title>
@@ -128,7 +128,7 @@ html.is-revealing .page-loader * { animation-play-state: paused; }
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=20261023-camera-large">
 </head>
 <body>
-    <!-- page-loader:body:start --><div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы"><div class="page-loader__scene" aria-hidden="true"><div class="page-loader__form page-loader__form--camera"><img class="page-loader__copy page-loader__copy--three"  src="assets/loading/antique-camera.webp" alt="" width="480" height="480" /><img class="page-loader__copy page-loader__copy--two"  src="assets/loading/antique-camera.webp" alt="" width="480" height="480" /><img class="page-loader__copy page-loader__copy--one"  src="assets/loading/antique-camera.webp" alt="" width="480" height="480" /><img class="page-loader__copy page-loader__copy--main" data-camera-front src="assets/loading/antique-camera.webp" alt="" width="480" height="480" fetchpriority="high" /></div><div class="page-loader__form page-loader__form--logo"><img class="page-loader__copy page-loader__copy--three"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--two"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--one"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--main" data-camera-logo src="assets/studio-camera-logo.png" alt="" width="521" height="462" fetchpriority="high" /></div><span class="page-loader__flash"></span></div></div><!-- page-loader:body:end -->
+    <!-- page-loader:body:start --><div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы"><div class="page-loader__scene" aria-hidden="true"><div class="page-loader__form page-loader__form--logo"><img class="page-loader__copy page-loader__copy--three"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--two"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--one"  src="assets/studio-camera-logo.png" alt="" width="521" height="462" /><img class="page-loader__copy page-loader__copy--main" data-camera-logo src="assets/studio-camera-logo.png" alt="" width="521" height="462" fetchpriority="high" /></div><div class="page-loader__form page-loader__form--camera"><img class="page-loader__copy page-loader__copy--three"  src="assets/loading/antique-camera.webp" alt="" width="480" height="480" /><img class="page-loader__copy page-loader__copy--two"  src="assets/loading/antique-camera.webp" alt="" width="480" height="480" /><img class="page-loader__copy page-loader__copy--one"  src="assets/loading/antique-camera.webp" alt="" width="480" height="480" /><img class="page-loader__copy page-loader__copy--main" data-camera-front src="assets/loading/antique-camera.webp" alt="" width="480" height="480" fetchpriority="high" /></div><span class="page-loader__flash"></span></div></div><!-- page-loader:body:end -->
   <main class="case-screen">
     <aside class="case-sidebar" aria-label="О проекте">
       <a class="case-back" href="index.html#portfolio"><span class="case-back__arrow" aria-hidden="true">←</span>Все работы</a>

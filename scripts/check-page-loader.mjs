@@ -75,7 +75,7 @@ assert.equal(normal.offscreenDecoded, false, 'Below-fold images never hold the c
 assert.equal(normal.content.inert, false);
 assert.equal(normal.alreadyInert.inert, true, 'Existing inert state is preserved');
 assert.equal(normal.attrs.has('aria-busy'), false);
-await normal.advance(500);
+await normal.advance(540);
 assert.equal(normal.removed, true);
 assert.equal(normal.classes.size, 0, 'Both cover and scroll lock are removed');
 
@@ -86,7 +86,7 @@ for (const options of [{ pendingFonts: true }, { pendingCamera: true }, {}]) {
   assert.equal(stalled.window.__pageLoader.finished, true, 'Missing app, hanging fonts or camera cannot block the site');
   assert.equal(stalled.content.inert, false);
   stalled.ready();
-  await stalled.advance(500);
+  await stalled.advance(540);
   assert.equal(stalled.removed, true, 'Late readiness never restarts the cover');
 }
 const failed = harness({ brokenImage: true, reduced: true });
@@ -98,6 +98,7 @@ missingLogo.ready();
 await missingLogo.advance(340);
 assert.equal(missingLogo.window.__pageLoader.finished, true, 'Missing logo cannot block the page');
 assert.equal(missingLogo.coverClasses.has('can-switch'), false, 'Never switch to an empty logo frame');
+assert.equal(missingLogo.coverClasses.has('camera-only'), true, 'A failed logo falls back to the available camera');
 const restored = harness();
 const pageshow = new Event('pageshow');
 Object.defineProperty(pageshow, 'persisted', { value: true });

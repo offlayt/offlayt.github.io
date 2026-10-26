@@ -19,9 +19,14 @@
   const front = cover.querySelector('[data-camera-front]');
   const logo = cover.querySelector('[data-camera-logo]');
   const cameraReady = Promise.allSettled([decode(front), decode(logo)]).then(() => {
-    if (state.finished || front.naturalWidth === 0) return;
-    cover.classList.add('is-camera-ready');
-    if (logo.naturalWidth > 0) cover.classList.add('can-switch');
+    if (state.finished) return;
+    if (logo.naturalWidth > 0) {
+      cover.classList.add('is-camera-ready');
+      if (front.naturalWidth > 0) cover.classList.add('can-switch');
+    } else if (front.naturalWidth > 0) {
+      cover.classList.add('is-camera-ready');
+      cover.classList.add('camera-only');
+    }
   });
   const wallpaper = () => {
     const wall = document.querySelector('.wallpaper');

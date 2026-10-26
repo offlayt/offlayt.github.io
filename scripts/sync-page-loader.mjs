@@ -21,13 +21,13 @@ const boot = appReady => `<!-- page-loader:head:start -->
           setTimeout(() => {
             root.classList.remove('is-revealing');
             document.querySelector('.page-loader')?.remove();
-          }, immediate || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500);
+          }, immediate || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 540);
         };
         state.timeout = setTimeout(() => state.reveal(), 6000);
       })();
     </script>
-    <link rel="preload" as="image" href="assets/loading/antique-camera.webp" fetchpriority="high">
-    <script defer src="js/page-loader.js?v=20261026-camera-trail"></script>
+    <link rel="preload" as="image" href="assets/studio-camera-logo.png" fetchpriority="high">
+    <script defer src="js/page-loader.js?v=20261026-logo-cascade"></script>
     <!-- page-loader:head:end -->`;
 function form(kind, source, width, height) {
   const copies = ['three', 'two', 'one', 'main'].map(copy => {
@@ -41,8 +41,8 @@ function form(kind, source, width, height) {
 const markup = '<!-- page-loader:body:start -->'
   + '<div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы">'
   + '<div class="page-loader__scene" aria-hidden="true">'
-  + form('camera', 'assets/loading/antique-camera.webp', 480, 480)
   + form('logo', 'assets/studio-camera-logo.png', 521, 462)
+  + form('camera', 'assets/loading/antique-camera.webp', 480, 480)
   + '<span class="page-loader__flash"></span></div></div><!-- page-loader:body:end -->';
 for (const file of (await readdir(root)).filter(name => name === 'index.html' || /^case-.*\.html$/.test(name))) {
   const url = new URL(file, root);

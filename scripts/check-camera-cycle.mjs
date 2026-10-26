@@ -16,9 +16,8 @@ function frames(name, property) {
   return [...result].sort((a,b) => a[0]-b[0]);
 }
 const poses = ['camera', 'logo'].map(name => frames('loader-' + name + '-form', 'opacity'));
-frames('loader-trail', 'transform');
-frames('loader-trail', 'opacity');
-frames('loader-darken', 'opacity');
+frames('loader-copy-fall', 'transform');
+frames('loader-copy-opacity', 'opacity');
 const flash = frames('loader-soft-flash', 'opacity');
 assert.ok(Math.max(...flash.map(([, value]) => Number(value))) <= .16, 'The flash remains subdued');
 function opacity(keyframes, phase) {
@@ -31,12 +30,16 @@ for (let phase = 0; phase <= 100; phase += .25) {
   const sum = poses.reduce((total, pose) => total + opacity(pose, phase), 0);
   assert.ok(Math.abs(sum-1) < 1e-9, 'No empty or doubled exposure at phase ' + phase);
 }
-assert.deepEqual(poses.map(p => opacity(p, 20)), [1,0], 'The first half shows the antique camera');
-assert.deepEqual(poses.map(p => opacity(p, 70)), [0,1], 'The second half shows the monochrome logo');
+assert.deepEqual(poses.map(p => opacity(p, 20)), [0,1], 'The first half shows the monochrome logo');
+assert.deepEqual(poses.map(p => opacity(p, 70)), [1,0], 'The second half shows the antique camera');
 for (const filename of ['assets/loading/antique-camera.webp', 'assets/studio-camera-logo.png']) {
   assert.ok((await stat(new URL(filename, root))).size < 100_000, filename + ': lightweight asset');
 }
 const generator = await readFile(new URL('scripts/sync-page-loader.mjs', root), 'utf8');
 assert.match(generator, /\['three', 'two', 'one', 'main'\]/, 'Each image has three fading copies');
 assert.ok(!generator.includes('data-camera-view'), 'Only the static front and logo are requested');
-console.log('Validated 401 cycle phases, camera/logo alternation, matching trail seam and low-intensity flashes.');
+assert.ok(css.includes('--copy-drop: 92%'), 'Copies travel almost a full image height');
+assert.ok(css.includes('--copy-lag: 180ms'), 'Copies descend in sequence');
+assert.ok(css.includes('loader-copy-fall var(--camera-cycle) linear'), 'The descent has constant velocity');
+assert.ok(!css.includes('loader-darken'), 'The main picture remains stable while copies move');
+console.log('Validated logo-first cycle, 401 phases, foreground copy cascade, continuous descent and subdued flashes.');
