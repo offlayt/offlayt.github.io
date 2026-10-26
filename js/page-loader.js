@@ -17,15 +17,11 @@
     return image.decode().catch(() => {});
   };
   const front = cover.querySelector('[data-camera-front]');
-  const cameraReady = decode(front);
-  // Extra views never delay the page. Animate only after both angles decoded.
-  const views = [...cover.querySelectorAll('[data-camera-view]')];
-  Promise.allSettled(views.map(decode)).then(() => {
-    if (!state.finished && views.every(image => image.naturalWidth > 0)) cover.classList.add('has-camera-views');
-  });
-  const closed = cover.querySelector('[data-camera-closed]');
-  decode(closed).then(() => {
-    if (!state.finished && closed.naturalWidth > 0) cover.classList.add('has-camera-closed');
+  const logo = cover.querySelector('[data-camera-logo]');
+  const cameraReady = Promise.allSettled([decode(front), decode(logo)]).then(() => {
+    if (state.finished || front.naturalWidth === 0) return;
+    cover.classList.add('is-camera-ready');
+    if (logo.naturalWidth > 0) cover.classList.add('can-switch');
   });
   const wallpaper = () => {
     const wall = document.querySelector('.wallpaper');

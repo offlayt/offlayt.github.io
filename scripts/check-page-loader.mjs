@@ -8,19 +8,18 @@ const bootstrap = html.match(/<script>\s*([\s\S]*?)<\/script>/)[1];
 const script = await readFile(new URL('js/page-loader.js', root), 'utf8');
 const flush = async () => { for (let i = 0; i < 20; i++) await Promise.resolve(); };
 
-function harness({ reduced = false, pendingFonts = false, brokenImage = false, pendingCamera = false, pendingViews = false } = {}) {
+function harness({ reduced = false, pendingFonts = false, brokenImage = false, pendingCamera = false, brokenLogo = false } = {}) {
   let now = 0, sequence = 0, removed = false;
   const timers = new Map(), classes = new Set(), attrs = new Map();
   const events = new EventTarget();
   const content = { inert: false }, alreadyInert = { inert: true };
   const camera = { loading: 'eager', naturalWidth: 480, decode: () => pendingCamera ? new Promise(() => {}) : Promise.resolve() };
-  const additional = () => ({ naturalWidth: 480, decode: () => pendingViews ? new Promise(() => {}) : Promise.resolve() });
-  const views = [additional(), additional()], closed = additional();
+  const logo = { naturalWidth: brokenLogo ? 0 : 521, decode: () => brokenLogo ? Promise.reject(new Error('missing logo')) : Promise.resolve() };
+  const coverClasses = new Set();
   const cover = {
     contains: () => false,
-    querySelector: selector => selector === '[data-camera-front]' ? camera : closed,
-    querySelectorAll: () => views,
-    classList: { add() {} },
+    querySelector: selector => selector === '[data-camera-front]' ? camera : logo,
+    classList: { add: name => coverClasses.add(name) },
     remove: () => { removed = true; },
   };
   let offscreenDecoded = false;
@@ -59,7 +58,7 @@ function harness({ reduced = false, pendingFonts = false, brokenImage = false, p
     }
     now = end;
   }
-  return { window, content, alreadyInert, classes, attrs, advance,
+  return { window, content, alreadyInert, classes, attrs, coverClasses, advance,
     get removed() { return removed; }, get offscreenDecoded() { return offscreenDecoded; },
     ready() { window.dispatchEvent(new Event('portfolio:ready')); },
   };
@@ -76,7 +75,7 @@ assert.equal(normal.offscreenDecoded, false, 'Below-fold images never hold the c
 assert.equal(normal.content.inert, false);
 assert.equal(normal.alreadyInert.inert, true, 'Existing inert state is preserved');
 assert.equal(normal.attrs.has('aria-busy'), false);
-await normal.advance(520);
+await normal.advance(500);
 assert.equal(normal.removed, true);
 assert.equal(normal.classes.size, 0, 'Both cover and scroll lock are removed');
 
@@ -87,17 +86,18 @@ for (const options of [{ pendingFonts: true }, { pendingCamera: true }, {}]) {
   assert.equal(stalled.window.__pageLoader.finished, true, 'Missing app, hanging fonts or camera cannot block the site');
   assert.equal(stalled.content.inert, false);
   stalled.ready();
-  await stalled.advance(520);
+  await stalled.advance(500);
   assert.equal(stalled.removed, true, 'Late readiness never restarts the cover');
 }
 const failed = harness({ brokenImage: true, reduced: true });
 failed.ready();
 await failed.advance(0);
 assert.equal(failed.removed, true, 'Broken images settle; reduced motion skips the artificial minimum');
-const slowViews = harness({ pendingViews: true });
-slowViews.ready();
-await slowViews.advance(340);
-assert.equal(slowViews.window.__pageLoader.finished, true, 'Secondary camera states never delay the page');
+const missingLogo = harness({ brokenLogo: true });
+missingLogo.ready();
+await missingLogo.advance(340);
+assert.equal(missingLogo.window.__pageLoader.finished, true, 'Missing logo cannot block the page');
+assert.equal(missingLogo.coverClasses.has('can-switch'), false, 'Never switch to an empty logo frame');
 const restored = harness();
 const pageshow = new Event('pageshow');
 Object.defineProperty(pageshow, 'persisted', { value: true });
@@ -111,6 +111,6 @@ for (const name of ['index.html', 'case-aititek.html']) {
 }
 const loaderMarkup = html.match(/<!-- page-loader:body:start -->([\s\S]*?)<!-- page-loader:body:end -->/)[1];
 assert.equal(loaderMarkup.replace(/<[^>]*>/g, '').trim(), '', 'Loader has no visible text');
-assert.ok(!loaderMarkup.includes('studio-camera-logo'), 'Loader uses a physical camera rather than the logo');
+assert.ok(loaderMarkup.includes('assets/studio-camera-logo.png'), 'The second form uses the original monochrome logo');
 assert.ok(loaderMarkup.includes('assets/loading/antique-camera.webp'));
 console.log('Validated first-screen gating, lazy media, image errors, app/font timeout, inert cleanup, reduced motion and bfcache.');

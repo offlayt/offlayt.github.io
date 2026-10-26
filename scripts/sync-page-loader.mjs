@@ -21,28 +21,29 @@ const boot = appReady => `<!-- page-loader:head:start -->
           setTimeout(() => {
             root.classList.remove('is-revealing');
             document.querySelector('.page-loader')?.remove();
-          }, immediate || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 520);
+          }, immediate || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500);
         };
         state.timeout = setTimeout(() => state.reveal(), 6000);
       })();
     </script>
     <link rel="preload" as="image" href="assets/loading/antique-camera.webp" fetchpriority="high">
-    <script defer src="js/page-loader.js?v=20261026-camera-states"></script>
+    <script defer src="js/page-loader.js?v=20261026-camera-trail"></script>
     <!-- page-loader:head:end -->`;
-const markup = `<!-- page-loader:body:start -->
-    <div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы">
-      <div class="page-loader__scene" aria-hidden="true">
-        <div class="page-loader__camera">
-          <div class="page-loader__open">
-            <img class="page-loader__pose page-loader__pose--front" data-camera-front src="assets/loading/antique-camera.webp" alt="" width="480" height="480" fetchpriority="high" />
-            <img class="page-loader__pose page-loader__pose--left" data-camera-view src="assets/loading/antique-camera-left.webp" alt="" width="480" height="480" fetchpriority="low" decoding="async" />
-            <img class="page-loader__pose page-loader__pose--right" data-camera-view src="assets/loading/antique-camera-right.webp" alt="" width="480" height="480" fetchpriority="low" decoding="async" />
-          </div>
-          <img class="page-loader__pose page-loader__pose--closed" data-camera-closed src="assets/loading/antique-camera-closed.webp" alt="" width="480" height="480" fetchpriority="low" decoding="async" />
-        </div>
-      </div>
-    </div>
-    <!-- page-loader:body:end -->`;
+function form(kind, source, width, height) {
+  const copies = ['three', 'two', 'one', 'main'].map(copy => {
+    const marker = copy === 'main' ? (kind === 'camera' ? 'data-camera-front' : 'data-camera-logo') : '';
+    return '<img class="page-loader__copy page-loader__copy--' + copy + '" ' + marker
+      + ' src="' + source + '" alt="" width="' + width + '" height="' + height + '"'
+      + (copy === 'main' ? ' fetchpriority="high"' : '') + ' />';
+  }).join('');
+  return '<div class="page-loader__form page-loader__form--' + kind + '">' + copies + '</div>';
+}
+const markup = '<!-- page-loader:body:start -->'
+  + '<div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы">'
+  + '<div class="page-loader__scene" aria-hidden="true">'
+  + form('camera', 'assets/loading/antique-camera.webp', 480, 480)
+  + form('logo', 'assets/studio-camera-logo.png', 521, 462)
+  + '<span class="page-loader__flash"></span></div></div><!-- page-loader:body:end -->';
 for (const file of (await readdir(root)).filter(name => name === 'index.html' || /^case-.*\.html$/.test(name))) {
   const url = new URL(file, root);
   let html = await readFile(url, 'utf8');

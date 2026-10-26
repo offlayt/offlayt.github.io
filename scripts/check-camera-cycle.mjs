@@ -15,8 +15,12 @@ function frames(name, property) {
   assert.equal(result.get(0), result.get(100), name + ': no jump at the seam');
   return [...result].sort((a,b) => a[0]-b[0]);
 }
-const poses = ['front', 'left', 'right'].map(name => frames('loader-view-' + name, 'opacity'));
-frames('loader-float', 'transform');
+const poses = ['camera', 'logo'].map(name => frames('loader-' + name + '-form', 'opacity'));
+frames('loader-trail', 'transform');
+frames('loader-trail', 'opacity');
+frames('loader-darken', 'opacity');
+const flash = frames('loader-soft-flash', 'opacity');
+assert.ok(Math.max(...flash.map(([, value]) => Number(value))) <= .16, 'The flash remains subdued');
 function opacity(keyframes, phase) {
   const index = keyframes.findIndex(([at]) => at >= phase);
   if (!index) return Number(keyframes[0][1]);
@@ -27,10 +31,12 @@ for (let phase = 0; phase <= 100; phase += .25) {
   const sum = poses.reduce((total, pose) => total + opacity(pose, phase), 0);
   assert.ok(Math.abs(sum-1) < 1e-9, 'No empty or doubled exposure at phase ' + phase);
 }
-assert.deepEqual(poses.map(p => opacity(p, 24)), [0,1,0], 'Left state is shown fully');
-assert.deepEqual(poses.map(p => opacity(p, 70)), [0,0,1], 'Right state is shown fully');
-for (const filename of ['antique-camera.webp', 'antique-camera-left.webp', 'antique-camera-right.webp', 'antique-camera-closed.webp']) {
-  assert.ok((await stat(new URL('assets/loading/' + filename, root))).size < 100_000, filename + ': lightweight frame');
+assert.deepEqual(poses.map(p => opacity(p, 20)), [1,0], 'The first half shows the antique camera');
+assert.deepEqual(poses.map(p => opacity(p, 70)), [0,1], 'The second half shows the monochrome logo');
+for (const filename of ['assets/loading/antique-camera.webp', 'assets/studio-camera-logo.png']) {
+  assert.ok((await stat(new URL(filename, root))).size < 100_000, filename + ': lightweight asset');
 }
-assert.ok(!css.includes('clip-path'), 'Whole camera states replace sliced artwork');
-console.log('Validated 401 loop phases, opacity continuity, matching seam, distinct side states and four optimized assets.');
+const generator = await readFile(new URL('scripts/sync-page-loader.mjs', root), 'utf8');
+assert.match(generator, /\['three', 'two', 'one', 'main'\]/, 'Each image has three fading copies');
+assert.ok(!generator.includes('data-camera-view'), 'Only the static front and logo are requested');
+console.log('Validated 401 cycle phases, camera/logo alternation, matching trail seam and low-intensity flashes.');
