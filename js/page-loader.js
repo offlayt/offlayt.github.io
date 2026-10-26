@@ -16,16 +16,11 @@
     image.loading = 'eager';
     return image.decode().catch(() => {});
   };
-  const front = cover.querySelector('[data-camera-front]');
   const logo = cover.querySelector('[data-camera-logo]');
-  const cameraReady = Promise.allSettled([decode(front), decode(logo)]).then(() => {
+  const logoReady = decode(logo).then(() => {
     if (state.finished) return;
     if (logo.naturalWidth > 0) {
-      cover.classList.add('is-camera-ready');
-      if (front.naturalWidth > 0) cover.classList.add('can-switch');
-    } else if (front.naturalWidth > 0) {
-      cover.classList.add('is-camera-ready');
-      cover.classList.add('camera-only');
+      cover.classList.add('is-logo-ready');
     }
   });
   const wallpaper = () => {
@@ -44,7 +39,7 @@
 
   app.then(async () => {
     if (state.finished) return;
-    const jobs = [cameraReady, document.fonts.ready, wallpaper(), ...visibleImages().map(decode)];
+    const jobs = [logoReady, document.fonts.ready, wallpaper(), ...visibleImages().map(decode)];
     await Promise.allSettled(jobs);
     if (state.finished) return;
     const minimum = reduced.matches ? 0 : 340;

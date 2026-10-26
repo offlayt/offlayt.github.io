@@ -8,17 +8,16 @@ const bootstrap = html.match(/<script>\s*([\s\S]*?)<\/script>/)[1];
 const script = await readFile(new URL('js/page-loader.js', root), 'utf8');
 const flush = async () => { for (let i = 0; i < 20; i++) await Promise.resolve(); };
 
-function harness({ reduced = false, pendingFonts = false, brokenImage = false, pendingCamera = false, brokenLogo = false } = {}) {
+function harness({ reduced = false, pendingFonts = false, brokenImage = false, pendingLogo = false, brokenLogo = false } = {}) {
   let now = 0, sequence = 0, removed = false;
   const timers = new Map(), classes = new Set(), attrs = new Map();
   const events = new EventTarget();
   const content = { inert: false }, alreadyInert = { inert: true };
-  const camera = { loading: 'eager', naturalWidth: 480, decode: () => pendingCamera ? new Promise(() => {}) : Promise.resolve() };
-  const logo = { naturalWidth: brokenLogo ? 0 : 521, decode: () => brokenLogo ? Promise.reject(new Error('missing logo')) : Promise.resolve() };
+  const logo = { naturalWidth: brokenLogo ? 0 : 521, decode: () => pendingLogo ? new Promise(() => {}) : brokenLogo ? Promise.reject(new Error('missing logo')) : Promise.resolve() };
   const coverClasses = new Set();
   const cover = {
     contains: () => false,
-    querySelector: selector => selector === '[data-camera-front]' ? camera : logo,
+    querySelector: () => logo,
     classList: { add: name => coverClasses.add(name) },
     remove: () => { removed = true; },
   };
@@ -68,7 +67,7 @@ const normal = harness();
 assert.equal(normal.content.inert, true, 'Underlying controls cannot receive focus during loading');
 normal.ready();
 await normal.advance(339);
-assert.equal(normal.window.__pageLoader.finished, false, 'Fast loads get one short camera beat');
+assert.equal(normal.window.__pageLoader.finished, false, 'Fast loads get one short logo beat');
 await normal.advance(1);
 assert.equal(normal.window.__pageLoader.finished, true, 'First-screen readiness reveals without waiting for window.load');
 assert.equal(normal.offscreenDecoded, false, 'Below-fold images never hold the cover');
@@ -79,11 +78,11 @@ await normal.advance(540);
 assert.equal(normal.removed, true);
 assert.equal(normal.classes.size, 0, 'Both cover and scroll lock are removed');
 
-for (const options of [{ pendingFonts: true }, { pendingCamera: true }, {}]) {
+for (const options of [{ pendingFonts: true }, { pendingLogo: true }, {}]) {
   const stalled = harness(options);
-  if (options.pendingFonts || options.pendingCamera) stalled.ready();
+  if (options.pendingFonts || options.pendingLogo) stalled.ready();
   await stalled.advance(6000);
-  assert.equal(stalled.window.__pageLoader.finished, true, 'Missing app, hanging fonts or camera cannot block the site');
+  assert.equal(stalled.window.__pageLoader.finished, true, 'Missing app, hanging fonts or logo cannot block the site');
   assert.equal(stalled.content.inert, false);
   stalled.ready();
   await stalled.advance(540);
@@ -97,8 +96,7 @@ const missingLogo = harness({ brokenLogo: true });
 missingLogo.ready();
 await missingLogo.advance(340);
 assert.equal(missingLogo.window.__pageLoader.finished, true, 'Missing logo cannot block the page');
-assert.equal(missingLogo.coverClasses.has('can-switch'), false, 'Never switch to an empty logo frame');
-assert.equal(missingLogo.coverClasses.has('camera-only'), true, 'A failed logo falls back to the available camera');
+assert.equal(missingLogo.coverClasses.has('is-logo-ready'), false, 'A failed logo never starts an empty animation');
 const restored = harness();
 const pageshow = new Event('pageshow');
 Object.defineProperty(pageshow, 'persisted', { value: true });
@@ -112,6 +110,7 @@ for (const name of ['index.html', 'case-aititek.html']) {
 }
 const loaderMarkup = html.match(/<!-- page-loader:body:start -->([\s\S]*?)<!-- page-loader:body:end -->/)[1];
 assert.equal(loaderMarkup.replace(/<[^>]*>/g, '').trim(), '', 'Loader has no visible text');
-assert.ok(loaderMarkup.includes('assets/studio-camera-logo.png'), 'The second form uses the original monochrome logo');
-assert.ok(loaderMarkup.includes('assets/loading/antique-camera.webp'));
+assert.ok(loaderMarkup.includes('assets/studio-camera-logo.png'), 'The only form uses the original monochrome logo');
+assert.ok(!loaderMarkup.includes('antique-camera') && !loaderMarkup.includes('data-camera-front'));
+assert.equal((loaderMarkup.match(/<img /g) || []).length, 7, 'One original and six copies');
 console.log('Validated first-screen gating, lazy media, image errors, app/font timeout, inert cleanup, reduced motion and bfcache.');

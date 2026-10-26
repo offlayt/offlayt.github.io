@@ -27,23 +27,24 @@ const boot = appReady => `<!-- page-loader:head:start -->
       })();
     </script>
     <link rel="preload" as="image" href="assets/studio-camera-logo.png" fetchpriority="high">
-    <script defer src="js/page-loader.js?v=20261026-cascade-burst"></script>
+    <script defer src="js/page-loader.js?v=20261026-logo-fold-loop"></script>
     <!-- page-loader:head:end -->`;
 function form(kind, source, width, height) {
-  const copies = ['one', 'two', 'three', 'four', 'five', 'six', 'main'].map(copy => {
-    const marker = copy === 'main' ? (kind === 'camera' ? 'data-camera-front' : 'data-camera-logo') : '';
+  const picture = copy => {
+    const marker = copy === 'main' ? 'data-camera-logo' : '';
     return '<img class="page-loader__copy page-loader__copy--' + copy + '" ' + marker
       + ' src="' + source + '" alt="" width="' + width + '" height="' + height + '"'
       + (copy === 'main' ? ' fetchpriority="high"' : '') + ' />';
-  }).join('');
-  return '<div class="page-loader__form page-loader__form--' + kind + '">' + copies + '</div>';
+  };
+  const copies = ['one', 'two', 'three', 'four', 'five', 'six'].map(picture).join('');
+  return '<div class="page-loader__form page-loader__form--' + kind + '">'
+    + picture('main') + '<div class="page-loader__stack">' + copies + '</div></div>';
 }
 const markup = '<!-- page-loader:body:start -->'
   + '<div class="page-loader" role="status" aria-live="polite" aria-label="Загрузка страницы">'
   + '<div class="page-loader__scene" aria-hidden="true">'
   + form('logo', 'assets/studio-camera-logo.png', 521, 462)
-  + form('camera', 'assets/loading/antique-camera.webp', 480, 480)
-  + '<span class="page-loader__flash"></span></div></div><!-- page-loader:body:end -->';
+  + '</div></div><!-- page-loader:body:end -->';
 for (const file of (await readdir(root)).filter(name => name === 'index.html' || /^case-.*\.html$/.test(name))) {
   const url = new URL(file, root);
   let html = await readFile(url, 'utf8');
@@ -53,4 +54,4 @@ for (const file of (await readdir(root)).filter(name => name === 'index.html' ||
   html = html.replace('<body>', `<body>\n    ${markup}`);
   await writeFile(url, html);
 }
-console.log('Synced the first-paint camera loader across home and case pages.');
+console.log('Synced the first-paint logo loader across home and case pages.');
