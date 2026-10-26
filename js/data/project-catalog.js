@@ -1179,61 +1179,6 @@ export const projectCatalog = [
     "caseHref": "case-zebra.html"
   },
   {
-    "id": "violetta",
-    "name": "Виолетта",
-    "status": "Авторский концепт",
-    "description": "Авторская работа с именем «Виолетта»: поиск формы и четыре варианта логотипа.",
-    "search": "logos brand",
-    "types": [
-      "logos",
-      "brand"
-    ],
-    "color": "#1b1b22",
-    "slides": [
-      {
-        "type": "brand",
-        "types": [
-          "brand",
-          "logos"
-        ],
-        "title": "Виолетта — работа 1",
-        "src": "assets/works/logos/logos-02.jpg",
-        "ratio": 2.25641
-      },
-      {
-        "type": "brand",
-        "types": [
-          "brand",
-          "logos"
-        ],
-        "title": "Виолетта — работа 2",
-        "src": "assets/works/logos/logos-03.jpg",
-        "ratio": 1.44266
-      },
-      {
-        "type": "brand",
-        "types": [
-          "brand",
-          "logos"
-        ],
-        "title": "Виолетта — работа 3",
-        "src": "assets/works/logos/logos-04.jpg",
-        "ratio": 1.803
-      },
-      {
-        "type": "brand",
-        "types": [
-          "brand",
-          "logos"
-        ],
-        "title": "Виолетта — работа 4",
-        "src": "assets/works/logos/logos-05.jpg",
-        "ratio": 1.56094
-      }
-    ],
-    "caseHref": "case-violetta.html"
-  },
-  {
     "id": "kovshi",
     "name": "Крыши",
     "status": "Авторский концепт",

@@ -1,7 +1,7 @@
 import { query, queryAll } from '../core/dom.js';
 import { wrapIndex } from '../core/math.js';
 import { reducedMotion } from '../core/media.js';
-import { projects, workTypes, typeColors } from '../data/projects.js?v=20261023-new-works';
+import { projects, workTypes, typeColors } from '../data/projects.js?v=20261026-without-violetta';
 import { createPortfolioModel } from './model.js';
 import { projectCard, updateCard } from './cards.js';
 import { createPortfolioLayout } from './layout.js';

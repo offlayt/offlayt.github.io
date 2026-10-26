@@ -1,4 +1,4 @@
-import { projectsById } from '../data/projects.js?v=20261023-new-works';
+import { projectsById } from '../data/projects.js?v=20261026-without-violetta';
 import { escapeHtml } from '../core/dom.js';
 
 export function relatedLinks(ids, filter = 'all') {
